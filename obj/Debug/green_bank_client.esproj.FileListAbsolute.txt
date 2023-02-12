@@ -1,0 +1,2 @@
+C:\Users\santi\Documents\code\green_bank_client\green_bank_client\obj\Debug\green_bank_client.esproj.SuggestedBindingRedirects.cache
+C:\Users\santi\Documents\code\green_bank_client\green_bank_client\obj\Debug\green_bank_client.esproj.CoreCompileInputs.cache

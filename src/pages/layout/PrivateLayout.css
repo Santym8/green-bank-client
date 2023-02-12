@@ -1,0 +1,13 @@
+.container {
+    height:100%;
+    display:flex;
+}
+
+.sidebar {
+    height: 100%;
+    width:255px;
+}
+
+.main {
+   margin-left:20px;
+}
