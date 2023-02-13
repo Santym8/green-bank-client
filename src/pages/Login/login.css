@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.container-login {
+  background-color: #e8e8e8;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.img-plant-login {
+  width: 45%;
+  height: 80%;
+}
+
+.img-plant-login__img {
+  border-radius: 57px;
+  width: 100%;
+  height: 100%;
+}
+/*------------------Form--------------------------*/
+.login-form {
+  width: 37%;
+  height: 80%;
+  background-color: #ffffff;
+
+  border-radius: 57px;
+  display: flex;
+  flex-direction: column;
+}
+/*-----------Icon-----------*/
+.login-form__back {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: right;
+  color: black;
+}
+
+.login-form__back__link {
+  color: black;
+}
+
+.login-form__back__icon {
+  margin-right: 30px;
+  margin-top: 20px;
+  font-size: 40px;
+}
+
+/*-----------Title-----------*/
+.login-form__title {
+  text-align: center;
+  font-family: "Roboto Slab", serif;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/*-----------Fields-----------*/
+.login-form__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.login-form__form__field {
+  width: 80%;
+}
+
+/*-----------Fields-----------*/
+.login-form__forgot-password {
+  padding-right: 10%;
+  text-align: right;
+  color: #1a3b63;
+}
+
+/*-----------Button-----------*/
+.login-form__button {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-form__button_button {
+  width: 80%;
+  height: 65px;
+  background-color: #0d3f1b;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.ogin-form__button_button__text {
+  color: #ffffff;
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+}
