@@ -7,11 +7,20 @@ import {
 } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import logo from '../../images/logo.png';
 
 function Layout() {
     return (
         <Sidebar className="sidebar" backgroundColor="#003300">
+            <div className="logo-container">
+                <img className='logo' src={logo} alt="Logo.png" />
+            </div>
             <Menu
+                className='menu'
                 menuItemStyles={{
                     button: {
                         color:'#FFFFFF',
@@ -105,8 +114,33 @@ function Layout() {
                         Nombres Locales
                     </MenuItem>
                 </SubMenu>
+                <div className="grid-ayuda-social">
+                    <div>
+                        <MenuItem
+                            component={<Link to="/ayuda" />}
+                            icon={<span class="material-symbols-outlined">help</span>}>
+                            Ayuda
+                        </MenuItem>
+                    </div>
+                    <div className='social-container'>
+                        <div className="social-icon">
+                            <a href='https://www.facebook.com/' target="_blank">
+                                <FontAwesomeIcon className="icon" icon={faFacebook} />
+                            </a> 
+                        </div>
+                        <div className="social-icon">
+                            <a href='https://twitter.com/' target="_blank">
+                                <FontAwesomeIcon className="icon" icon={faTwitter} />
+                            </a>                        
+                        </div>
+                        <div className="social-icon">
+                            <a href="https://mail.google.com/" target="_blank">
+                                <FontAwesomeIcon className="icon" icon={faGoogle} />
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </Menu>
-            
         </Sidebar>
 
 
