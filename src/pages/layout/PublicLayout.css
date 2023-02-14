@@ -1,9 +1,15 @@
-.PublicLayout{
+/* .PublicLayout{
     padding: 0;
     margin: 0;    
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+}
+
+.PublicLayout {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
 }
 
 .HeaderContainer{
@@ -13,8 +19,28 @@
 .ContentContainer{
     width: 100%;
     position: absolute;
-    /* top: 0px;
-    transform:translateY(-50%); */
     text-align: center;
-    
-}
+} */
+
+.PublicLayout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .HeaderContainer {
+    width: 100%;
+  }
+  
+  .HeaderContainer a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .ContentContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+  }
