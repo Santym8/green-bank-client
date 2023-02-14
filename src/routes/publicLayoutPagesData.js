@@ -1,12 +1,11 @@
-import Home from "../pages/Home";
-import Login from "../pages/Login";
+import Ayuda from "../pages/Ayuda";
 
 
 const PagesData = [
     {
-        path: "/",
-        element: <Home />,
-        title: "home"
+        path: "/ayuda",
+        element: <Ayuda />,
+        title: "Ayuda"
     }
 ];
 
