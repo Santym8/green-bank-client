@@ -1,12 +1,18 @@
 import React from 'react';
 import { Outlet } from 'react-router';
+import Head from '../../components/head/Head';
+import './PublicLayout.css';
 
 function PublicLayout() {
     return (
-        <>
-            <h1>Barra</h1>
-            <Outlet />
-        </>
+        <div className='PublicLayout'>            
+            <div className='HeaderContainer'>        
+                <Head/>     
+            </div>     
+            <div className='ContentContainer'>                    
+                <Outlet/>
+            </div>       
+        </div> 
     );
 }
 
