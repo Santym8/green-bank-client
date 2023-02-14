@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans&display=swap');
+.barra_navegacion{
+    background: #003300;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    height: 110px;
+    padding: 10px;   
+}
+
+
+.barra_navegacion__logo{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.barra_navegacion__logo img{
+    height: 180px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.barra_navegacion a{
+    color: white;
+    font-size: 28px;
+    font-family: 'Alumni Sans', sans-serif;
+    padding: 35px;
+    text-decoration: none;
+    list-style: none;
+    letter-spacing: 4px;
+}
