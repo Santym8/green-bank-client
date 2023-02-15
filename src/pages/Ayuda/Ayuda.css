@@ -1,0 +1,74 @@
+.help_container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+  }
+  
+  .help_container__title_content {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .accordion__title {
+    display: block;
+    font-size: 45px;
+    font-weight: bold;
+    color: #404D61;
+  }
+  
+  .accordion__faq__content {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 15px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .help_container__title_content h1{
+    font-size: 25px;
+  }
+  
+  .accordion__faq__content:hover {
+    background-color: #d3e2db;
+  }
+  
+  .accordion__faq-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-left: 40px;
+  }
+  
+  .accordion__faq-heading h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+  }
+  
+  .accordion__faq__content p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+    margin-left: 40px;
+  }
+  
+  .active {
+    display: block;
+  }
+  
+  .inactive {
+    display: none;
+  }
+  
+  .verticle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #333;
+  }
