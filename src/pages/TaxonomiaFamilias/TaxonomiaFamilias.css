@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Aleo:ital,wght@1,700&family=Inter:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.headPrivateContainer {
+    position: absolute;
+    max-width: 1185px;
+    width: 98%;
+    height: 18%;
+    top: 0px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.taxonomiaFamiliasContainer {
+    display: grid;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1.48498px solid #E0E1EC;
+    border-radius: 8.90991px;
+    height: 100%;
+    width: 96%;
+    justify-content: center;
+    grid-template-rows: 20% auto;
+
+}
+
+.FamiliasFilters {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.FamiliasFilters__Title {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 39px;
+    text-align: center;
+    color: #404D61;
+    margin: 5px
+}
+
+.FamiliasFilters__Search {
+    width: 100%;
+}
+
+.row-edits-icons-taxonomia span {
+    margin: 0px 10px;
+    border-radius: 100%;
+}
+
+.row-edits-icons-taxonomia span:hover {
+    cursor: pointer;
+    background-color: #404d6175;
+}
+
+.newFamiliasButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 6px 6px 8px;
+    width: 103px;
+    height: 36px;
+    background: #0D3F1B;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+}
+
+.newFamiliasButton p {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    color: #E0ECDD;
+}
+
+.newFamiliasButton:hover {
+    cursor: pointer;
+    background-color: #73DB23;
+}
+
+.taxonomiaFamiliasContainer__table {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}

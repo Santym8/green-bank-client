@@ -23,7 +23,7 @@ function Layout() {
                 className='menu'
                 menuItemStyles={{
                     button: {
-                        color:'#FFFFFF',
+                        color: '#FFFFFF',
                         backgroundColor: '#003300',
                         '&:hover': {
                             backgroundColor: '#0D3C0E',
@@ -91,6 +91,12 @@ function Layout() {
                     icon={<span class="material-symbols-outlined">yard</span>}>
 
                     <MenuItem
+                        component={<Link to="/taxonomia/familias" />}
+                        icon={<span class="material-symbols-outlined">Landscape</span>}>
+                        Familias
+                    </MenuItem>
+
+                    <MenuItem
                         component={<Link to="/taxonomia/generos" />}
                         icon={<span class="material-symbols-outlined">forest</span>}>
                         G&#233;eneros
@@ -126,12 +132,12 @@ function Layout() {
                         <div className="social-icon">
                             <a href='https://www.facebook.com/' target="_blank">
                                 <FontAwesomeIcon className="icon" icon={faFacebook} />
-                            </a> 
+                            </a>
                         </div>
                         <div className="social-icon">
                             <a href='https://twitter.com/' target="_blank">
                                 <FontAwesomeIcon className="icon" icon={faTwitter} />
-                            </a>                        
+                            </a>
                         </div>
                         <div className="social-icon">
                             <a href="https://mail.google.com/" target="_blank">
