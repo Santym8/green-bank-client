@@ -3,6 +3,7 @@ import TaxonomiaGeneros from "../pages/TaxonomiaGeneros";
 import TaxonomiaFamilias from "../pages/TaxonomiaFamilias";
 import TaxonomiaEspecies from "../pages/TaxonomiaEspecies";
 import TaxonomiaSubespecies from "../pages/TaxonomiaSubespecies";
+import TaxonomiaNombresLocales from "../pages/TaxonomiaNombresLocales";
 const PagesData = [
     {
         path: "/accesiones",
@@ -28,6 +29,11 @@ const PagesData = [
         path: "/taxonomia/subespecies",
         element: <TaxonomiaSubespecies />,
         title: "taxonomia subespecies"
+    },
+    {
+        path: "/taxonomia/nombres-locales",
+        element: <TaxonomiaNombresLocales />,
+        title: "taxonomia nombres locales"
     }
 ];
 
