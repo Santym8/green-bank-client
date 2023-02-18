@@ -1,6 +1,7 @@
 import Accesiones from "../pages/Accesiones";
 import TaxonomiaGeneros from "../pages/TaxonomiaGeneros";
 import TaxonomiaFamilias from "../pages/TaxonomiaFamilias";
+import TaxonomiaEspecies from "../pages/TaxonomiaEspecies";
 const PagesData = [
     {
         path: "/accesiones",
@@ -16,6 +17,11 @@ const PagesData = [
         path: "/taxonomia/familias",
         element: <TaxonomiaFamilias />,
         title: "taxonomia familias"
+    },
+    {
+        path: "/taxonomia/especies",
+        element: <TaxonomiaEspecies />,
+        title: "taxonomia especies"
     }
 ];
 
