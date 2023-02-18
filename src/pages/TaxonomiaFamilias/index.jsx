@@ -162,9 +162,6 @@ function CustomPaginationActionsTable() {
         </TableBody>
         <TableFooter>
           <TableRow className='paginationTable'>
-            {/* <div className='newFamiliasButton'>
-              <p>+  Nuevo</p>
-            </div> */}
             {ModalTaxon()}
             <TablePagination
               rowsPerPageOptions={[]}
