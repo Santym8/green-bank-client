@@ -49,7 +49,7 @@
     top: 55%;
     font-family: 'Chakra Petch', sans-serif;
     text-align: left;
-    color: black;
+    color: rgb(255, 255, 255);
     margin-right: 30px;
 }
 
@@ -90,7 +90,7 @@
 /* LOGOS-REDES-SOCIALES */
 
 .icon-tamaño {
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .logos-redes-sociales-landinPpage{

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./landingpage.css";
 import { Link } from 'react-router-dom';
-// import video2 from './media/video1_2.mp4';
+import video2 from './media/video1_2.mp4';
 import caret from './media/caret2.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -71,9 +71,9 @@ function LandingPage() {
                         </div>
                     </div>
                 </div>
-                {/* <video className='background-video' autoPlay loop muted>
+                <video className='background-video' autoPlay loop muted>
                     <source src={video2} type='video/mp4' />
-                </video> */}
+                </video>
             </div>
         </>
     );
