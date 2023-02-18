@@ -24,6 +24,11 @@ import TableHead from '@mui/material/TableHead';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
+// Modal
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -89,7 +94,11 @@ TablePaginationActions.propTypes = {
 function createData(codigo, familia, genero) {
   return { codigo, familia, genero };
 }
-
+const menuItems = [
+  { value: 1, label: "Apiaceae" },
+  { value: 2, label: "Rosaceae" },
+  { value: 3, label: "Liliaceae" },
+];
 const rows = [
   createData(11, "FAMILIA", "ACER"),
   createData(12, "FAMILIA", "ARALIA"),
@@ -167,9 +176,7 @@ function CustomPaginationActionsTable() {
         </TableBody>
         <TableFooter>
           <TableRow className='paginationTable'>
-            <div className='newGeneroButton'>
-              <p>+  Nuevo</p>
-            </div>
+            {ModalTaxon()}
             <TablePagination
               rowsPerPageOptions={[]}
               colSpan={3}
@@ -186,14 +193,55 @@ function CustomPaginationActionsTable() {
     </TableContainer>
   );
 }
+function ModalTaxon() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  return (
 
+    <div>
+      <div onClick={handleOpen} className='newFamiliasButton'>
+        <p>+  Nuevo</p>
+      </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="modalContainer" sx={style}>
+          <p className='modalContainer__Title'>Añadir Nuevo Género</p>
+          <SelectSmall
+            title='Familia'
+            menuItems={menuItems} />
+          <TextField className="modalContainer__Text" autoFocus="true" fullWidth="true"></TextField>
+          <div className="modalButtons">
+            <div onClick={handleClose} className='modalButtons__Anadir'>
+              <p>Añadir</p>
+            </div>
+            <div onClick={handleClose} className='modalButtons__Cancelar'>
+              <p>Cancelar</p>
+            </div>
+          </div>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
 function TaxonomiaGeneros() {
   const [searchTerm, setSearchTerm] = useState("");
-  const menuItems = [
-    { value: 1, label: "Apiaceae" },
-    { value: 2, label: "Rosaceae" },
-    { value: 3, label: "Liliaceae" },
-  ];
+
   return (
     <>
       <div className='headPrivateContainer'>
@@ -205,7 +253,7 @@ function TaxonomiaGeneros() {
       </div>
       <div className='taxonomiaGenerosContainer'>
         <div className="GenerosFilters">
-          <SelectSmall 
+          <SelectSmall
             title='Familia'
             menuItems={menuItems} />
           <div className='GenerosFilters__Button'>
