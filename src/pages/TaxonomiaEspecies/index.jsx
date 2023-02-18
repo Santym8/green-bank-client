@@ -224,7 +224,7 @@ function ModalTaxon() {
       >
         <Box className="modalContainer" sx={style}>
           <p className='modalContainer__Title'>Añadir Nueva Especie</p>
-          <div className="modalContainer_Selects">
+          <div className="modalContainer__SelectsEspecies">
             <SelectSmall
               title='Familia'
               menuItems={menuItemsFamilias} />

@@ -220,9 +220,11 @@ function ModalTaxon() {
       >
         <Box className="modalContainer" sx={style}>
           <p className='modalContainer__Title'>Añadir Nuevo Género</p>
-          <SelectSmall
-            title='Familia'
-            menuItems={menuItems} />
+          <div className="modalContainer__SelectGenero">
+            <SelectSmall
+              title='Familia'
+              menuItems={menuItems} />
+          </div>
           <TextField className="modalContainer__Text" autoFocus="true" fullWidth="true"></TextField>
           <div className="modalButtons">
             <div onClick={handleClose} className='modalButtons__Anadir'>

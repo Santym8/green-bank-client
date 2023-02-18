@@ -119,47 +119,6 @@
     font-size: 14px;
 }
 /* ------------------MODAL---------------------- */
-.modalContainer {
-    display: grid;
-    grid-template-rows: auto auto auto auto;
-    text-align: center;
-}
-
-.modalContainer__Title {
-    font-family: 'Aleo';
-    font-style: italic;
-    font-weight: 700;
-    font-size: 30px;
-    margin-bottom: 15px;
-}
-.modalButtons {
-    display: grid;
-    grid-template-columns: auto auto;
-}
-
-.modalButtons__Anadir,
-.modalButtons__Cancelar {
-    margin-top: 25px;
-    margin-left: auto;
-    margin-right: auto;
-    color: #ffffff;
-}
-.modalButtons__Anadir p,
-.modalButtons__Cancelar p {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-}
-.modalButtons__Anadir {
-    background-color: #73DB23;
-}
-
-.modalButtons__Anadir:hover,
-.modalButtons__Cancelar:hover {
-    cursor: pointer;
-}
-
-.modalButtons__Cancelar {
-    background-color: #C72424;
+.modalContainer__SelectGenero {
+    margin-bottom: 10px;
 }

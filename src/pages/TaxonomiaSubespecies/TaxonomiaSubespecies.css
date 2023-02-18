@@ -121,3 +121,10 @@
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
+
+/* ------------------MODAL---------------------- */
+.modalContainer__SelectsSubespecies {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    margin-bottom: 10px;
+}
