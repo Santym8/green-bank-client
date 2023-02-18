@@ -54,16 +54,21 @@
     background-color: #404d6175;
 }
 
-.newFamiliasButton {
+.newFamiliasButton,
+.modalButtons__Anadir,
+.modalButtons__Cancelar {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 6px 6px 6px 8px;
     width: 103px;
     height: 36px;
-    background: #0D3F1B;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 4px;
+}
+
+.newFamiliasButton {
+    background: #0D3F1B;
 }
 
 .newFamiliasButton p {
@@ -85,4 +90,48 @@
 .taxonomiaFamiliasContainer__table {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+}
+
+.modalContainer {
+    text-align: center;
+}
+
+.modalContainer__Title {
+    font-family: 'Aleo';
+    font-style: italic;
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.modalButtons {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.modalButtons__Anadir,
+.modalButtons__Cancelar {
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #ffffff;
+}
+.modalButtons__Anadir p,
+.modalButtons__Cancelar p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+}
+.modalButtons__Anadir {
+    background-color: #73DB23;
+}
+
+.modalButtons__Anadir:hover,
+.modalButtons__Cancelar:hover {
+    cursor: pointer;
+}
+
+.modalButtons__Cancelar {
+    background-color: #C72424;
 }
