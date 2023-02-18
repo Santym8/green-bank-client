@@ -190,14 +190,14 @@ function TaxonomiaEspecies() {
     { value: 1, label: "Asteraceae" },
     { value: 2, label: "Brasicaceae" },
     { value: 3, label: "Cactaceae" },
-    { value: 2, label: "Rosaceae" },
-    { value: 3, label: "Liliaceae" },
+    { value: 4, label: "Rosaceae" },
+    { value: 5, label: "Liliaceae" },
   ];
   const menuItemsGeneros = [
     { value: 1, label: "Acer" },
     { value: 2, label: "Aralia" },
     { value: 3, label: "Aloe" },
-    { value: 1, label: "Amarathus" },
+    { value: 4, label: "Amarathus" },
   ];
   return (
     <>
