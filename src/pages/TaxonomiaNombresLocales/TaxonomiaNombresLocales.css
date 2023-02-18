@@ -121,3 +121,9 @@
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
 }
+/* ------------------MODAL---------------------- */
+.modalContainer__SelectsNombresLocales {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    margin-bottom: 10px;
+}
