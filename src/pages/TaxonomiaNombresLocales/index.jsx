@@ -1,7 +1,7 @@
 import React from 'react';
 import HeadPrivateLayout from '../../components/HeadPrivateLayout/HeadPrivateLayout';
 import SelectSmall from '../../components/SelectSmall/SelectSmall';
-import './TaxonomiaSubespecies.css';
+import './TaxonomiaNombresLocales.css';
 import TextField from "@mui/material/TextField";
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -86,16 +86,16 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(codigo, familia, genero, especie, subespecie) {
-    return { codigo, familia, genero, especie, subespecie };
+function createData(codigo, familia, genero, especie, subespecie, nombreLocal) {
+    return { codigo, familia, genero, especie, subespecie, nombreLocal };
 }
 
 const rows = [
-    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS"),
-    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE CHINENSIS"),
-    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE SCHEIDEANA"),
-    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE TURKANENSIS"),
-    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE AFRICANA"),
+    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "ALOE"),
+    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "SAVILA"),
+    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "ZAVILA"),
+    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "XAVILA"),
+    createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "PENCO"),
 ].sort((a, b) => (a.familia < b.familia ? -1 : 1));
 
 function CustomPaginationActionsTable() {
@@ -117,15 +117,16 @@ function CustomPaginationActionsTable() {
 
     return (
         <TableContainer component={Paper}>
-            <Table className='tableSubespecies' sx={{ minWidth: 500 }} aria-label="custom pagination table">
+            <Table className='tableNombresLocales' sx={{ minWidth: 500 }} aria-label="custom pagination table">
                 <TableHead>
                     <TableRow>
                         <TableCell></TableCell>
-                        <TableCell align='left'>Código Subespecie</TableCell>
+                        <TableCell align='left'>Código Nombre Local</TableCell>
                         <TableCell align='left'>Familia</TableCell>
                         <TableCell align="left">Género</TableCell>
                         <TableCell align="left">Especie</TableCell>
                         <TableCell align="left">Subespecie</TableCell>
+                        <TableCell align="left">Nombre Local</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -153,6 +154,9 @@ function CustomPaginationActionsTable() {
                             <TableCell style={{ width: 160 }} align="left">
                                 {row.subespecie}
                             </TableCell>
+                            <TableCell style={{ width: 160 }} align="left">
+                                {row.nombreLocal}
+                            </TableCell>
                         </TableRow>
                     ))}
 
@@ -164,7 +168,7 @@ function CustomPaginationActionsTable() {
                 </TableBody>
                 <TableFooter>
                     <TableRow className='paginationTable'>
-                        <div className='newSubespeciesButton'>
+                        <div className='newNombresLocalesButton'>
                             <p>+  Nuevo</p>
                         </div>
                         <TablePagination
@@ -184,7 +188,7 @@ function CustomPaginationActionsTable() {
     );
 }
 
-function TaxonomiaSubespecies() {
+function TaxonomiaNombresLocales() {
     const [searchTerm, setSearchTerm] = useState("");
     const menuItemsFamilias = [
         { value: 1, label: "Asteraceae" },
@@ -203,19 +207,26 @@ function TaxonomiaSubespecies() {
         { value: 1, label: "Aloe Vera" },
         { value: 2, label: "Aloe Ferox" },
         { value: 3, label: "Aloe Striata" },
-        { value: 4, label: "Aleo Nobilis" },
+        { value: 4, label: "Aloe Nobilis" },
+    ];
+    const menuItemsSubespecies = [
+        { value: 1, label: "Aloe Barbadensis" },
+        { value: 2, label: "Aloe Chinensis" },
+        { value: 3, label: "Aloe Scheideana" },
+        { value: 4, label: "Aloe Turkanensis" },
+        { value: 5, label: "Aloe Africana" },
     ];
     return (
         <>
             <div className='headPrivateContainer'>
                 <HeadPrivateLayout
-                    title='Taxonomía Subespecies'
-                    icon='Grass'
+                    title='Taxonomía Nombres Locales'
+                    icon='potted_plant'
                     user='FL'
                 />
             </div>
-            <div className='taxonomiaSubespeciesContainer'>
-                <div className="SubespeciesFilters">
+            <div className='taxonomiaNombresLocalesContainer'>
+                <div className="nombresLocalesFilters">
                     <div className="SelectsContainer">
                         <SelectSmall
                             title='Familia'
@@ -226,13 +237,16 @@ function TaxonomiaSubespecies() {
                         <SelectSmall
                             title='Especie'
                             menuItems={menuItemsEspecies} />
+                        <SelectSmall
+                            title='Subespecie'
+                            menuItems={menuItemsSubespecies} />
                     </div>
-                    <div className='SubespeciesFilters__Button'>
+                    <div className='nombresLocalesFilters__Button'>
                         <p>Filtrar</p>
                     </div>
-                    <p className='SubespeciesFilters__Title'>o Buscar Subespecie</p>
+                    <p className='nombresLocalesFilters__Title'>o Buscar Nombre Local</p>
                     <TextField
-                        className='SubespeciesFilters__Search'
+                        className='nombresLocalesFilters__Search'
                         id="standard-search"
                         label="Buscar"
                         type="search"
@@ -250,7 +264,7 @@ function TaxonomiaSubespecies() {
                     />
                 </div>
 
-                <div className="taxonomiaSubespeciesContainer__table">
+                <div className="taxonomiaNombresLocalesContainer__table">
                     {CustomPaginationActionsTable()}
                 </div>
             </div>
@@ -260,4 +274,4 @@ function TaxonomiaSubespecies() {
 }
 
 
-export default TaxonomiaSubespecies;
+export default TaxonomiaNombresLocales;
