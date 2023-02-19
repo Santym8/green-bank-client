@@ -19,7 +19,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TableHead from '@mui/material/TableHead';
-
+import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 // Modal
@@ -87,28 +87,53 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(codigo, familia) {
-  return { codigo, familia };
-}
-
-const rows = [
-  createData(1, "ROSACEAE"),
-  createData(2, "POACEAE"),
-  createData(3, "FABACEAE"),
-  createData(4, "SOLANACEAE"),
-  createData(5, "LAMIACEAE"),
-  createData(6, "ORCHIDACEAE"),
-  createData(7, "ASTERACEAE"),
-  createData(8, "CACTACEAE"),
-  createData(9, "ERICACEAE"),
-  createData(10, "PINACEAE"),
-  createData(11, "BRASSICACEAE"),
-
-].sort((a, b) => (a.familia < b.familia ? -1 : 1));
-
 function CustomPaginationActionsTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [editingRow, setEditingRow] = React.useState(null);
+
+  const apiUrl = 'https://green-bank-api.onrender.com/api/taxonomia/familia';
+
+  const getOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  const fetchRows = () => {
+    setIsLoading(true); // establecer isLoading en verdadero justo antes de comenzar la solicitud
+    fetch(apiUrl, getOptions)
+      .then(response => response.json())
+      .then(data => {
+        data = data.data;
+        data.sort((a, b) => (a.familiaNombre < b.familiaNombre ? -1 : 1));
+        setRows(data);
+      })
+      .catch(error => console.error(error))
+      .finally(() => setIsLoading(false)); // establecer isLoading en falso después de completar la solicitud
+  }
+
+  React.useEffect(() => {
+    fetchRows();
+  }, []);
+  // -----------------AÑADIR REGISTRO-----------------------
+  const handleAnadir = (familiaNombre) => {
+    // Hacer una petición POST a la API del servidor
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ familiaNombre })
+    };
+    setIsLoading(true); // establecer isLoading en verdadero justo antes de comenzar la solicitud
+    fetch(apiUrl, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        fetchRows(); // actualizar filas
+      })
+      .catch(error => console.error(`Error al hacer la petición: ${error}`))
+      .finally(() => setIsLoading(false)); // establecer isLoading en falso después de completar la solicitud
+  };
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -122,9 +147,47 @@ function CustomPaginationActionsTable() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
+  // ---------------------EDITAR REGISTRO-----------------------------
+  const handleEditarSubmit = (newData, row) => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newData)
+    };
+    setIsLoading(true);
+    fetch(`${apiUrl}/${row.familiaId}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        const rowIndex = rows.findIndex(currentRow => currentRow.familiaId === row.familiaId);
+        if (rowIndex !== -1) {
+          const updatedRows = [...rows];
+          updatedRows[rowIndex] = newData;
+          setRows(updatedRows);
+          fetchRows(); // actualizar filas
+        }
+        setEditingRow(null);
+      })
+      .catch(error => console.error(`Error al hacer la petición: ${error}`))
+      .finally(() => setIsLoading(false));
+  };
+  // ------------------ELIMINAR REGISTRO--------------------------
+  const handleEliminar = (familiaId) => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    fetch(`${apiUrl}/${familiaId}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        fetchRows(); // actualizar filas
+      })
+      .catch(error => console.error(`Error al hacer la petición: ${error}`));
+  };
   return (
     <TableContainer component={Paper}>
+      {isLoading && <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%' }} />}
       <Table className='tableFamilias' sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow>
@@ -138,16 +201,16 @@ function CustomPaginationActionsTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.codigo}>
+            <TableRow key={row.familiaId}>
               <TableCell className='row-edits-icons-taxonomia' component="th" scope="row">
-                <span class="material-symbols-outlined">edit</span>
-                <span class="material-symbols-outlined">delete</span>
+                <ModalEditar row={row} onSubmit={(newData) => handleEditarSubmit(newData, row)} onClose={() => setEditingRow(null)} />
+                <span class="material-symbols-outlined" onClick={() => handleEliminar(row.familiaId)}>delete</span>
               </TableCell>
               <TableCell component="th" scope="row">
-                {row.codigo}
+                {row.familiaId}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.familia}
+                {row.familiaNombre}
               </TableCell>
             </TableRow>
           ))}
@@ -160,7 +223,7 @@ function CustomPaginationActionsTable() {
         </TableBody>
         <TableFooter>
           <TableRow className='paginationTable'>
-            {ModalTaxon()}
+            <ModalTaxon onAdd={handleAnadir} />
             <TablePagination
               rowsPerPageOptions={[]}
               colSpan={3}
@@ -177,10 +240,88 @@ function CustomPaginationActionsTable() {
     </TableContainer>
   );
 }
-function ModalTaxon() {
+
+function ModalEditar({ row, onSubmit, onClose }) {
   const [open, setOpen] = React.useState(false);
+  const [familiaNombre, setFamiliaNombre] = React.useState(row.familiaNombre);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const handleSubmit = () => {
+
+    const newData = { familiaId: row.familiaId, familiaNombre };
+    onSubmit(newData);
+    handleClose();
+  };
+
+  const handleChange = (event) => {
+    setFamiliaNombre(event.target.value);
+  };
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  return (
+    <>
+      <span onClick={handleOpen} class="material-symbols-outlined">edit</span>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className="modalContainer" sx={style}>
+          <p className='modalContainer__Title'>Editar Familia</p>
+          <TextField
+            required
+            label="Nombre de la familia"
+            value={familiaNombre}
+            onChange={handleChange}
+          />
+          <div className="modalButtons">
+            <div onClick={handleSubmit} className='modalButtons__Anadir'>
+              <p>Guardar</p>
+            </div>
+            <div onClick={handleClose} variant="outlined" className='modalButtons__Cancelar'>
+              <p>Cancelar</p>
+            </div>
+          </div>
+        </Box>
+      </Modal>
+    </>
+  );
+}
+
+function ModalTaxon(props) {
+  const { onAdd } = props;
+  const [open, setOpen] = React.useState(false);
+  const [familiaNombre, setFamiliaNombre] = useState('');
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleAnadir = () => {
+    handleClose();
+    onAdd(familiaNombre); // llamar a la función de actualización de filas
+    setFamiliaNombre('');
+  };
+
+  const handleFamiliaNombreChange = (event) => {
+    setFamiliaNombre(event.target.value);
+  };
   const style = {
     position: 'absolute',
     top: '50%',
@@ -195,7 +336,6 @@ function ModalTaxon() {
   return (
 
     <div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <div onClick={handleOpen} className='newFamiliasButton'>
         <p>+  Nuevo</p>
       </div>
@@ -207,9 +347,15 @@ function ModalTaxon() {
       >
         <Box className="modalContainer" sx={style}>
           <p className='modalContainer__Title'>Añadir Nueva Familia</p>
-          <TextField className="modalContainer__Text" autoFocus="true" fullWidth="true"></TextField>
+          <TextField
+            className="modalContainer__Text"
+            autoFocus="true"
+            value={familiaNombre}
+            onChange={handleFamiliaNombreChange}
+            label="Nombre de la familia"
+          />
           <div className="modalButtons">
-            <div onClick={handleClose} className='modalButtons__Anadir'>
+            <div onClick={handleAnadir} className='modalButtons__Anadir'>
               <p>Añadir</p>
             </div>
             <div onClick={handleClose} className='modalButtons__Cancelar'>
@@ -240,7 +386,6 @@ function TaxonomiaFamilias() {
             id="standard-search"
             label="Buscar"
             type="search"
-            fullWidth={true}
             autoFocus={true}
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
@@ -255,7 +400,7 @@ function TaxonomiaFamilias() {
         </div>
 
         <div className="taxonomiaFamiliasContainer__table">
-          {CustomPaginationActionsTable()}
+          <CustomPaginationActionsTable />
         </div>
       </div>
 
