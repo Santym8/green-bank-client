@@ -17,8 +17,9 @@ import { formInitialValues, validacionDatos } from "./dataForm";
 import { FormularioAccesionTaxonomia } from "./FormularioAccesionTaxonomia";
 import { FormularioAccesionRecoleccion } from "./FormularioAccesionRecoleccion";
 import { FormularioAccesionSuelo } from "./FormularioAccesionSuelo";
+import { FormularioAccesionClima } from "./FormularioAccesionClima";
 
-const steps = ["Taxonomía", "Recolección", "Suelo"];
+const steps = ["Taxonomía", "Recolección", "Suelo", "Clima"];
 
 const FormularioRegistroAccesiones = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -50,7 +51,9 @@ const FormularioRegistroAccesiones = () => {
       case 1:
         return <FormularioAccesionRecoleccion formik={formik} />;
       case 2:
-      return <FormularioAccesionSuelo formik={formik} />;
+        return <FormularioAccesionSuelo formik={formik} />;
+      case 3:
+        return <FormularioAccesionClima formik={formik} />;
       default:
         return <div>404: Not Found</div>;
     }

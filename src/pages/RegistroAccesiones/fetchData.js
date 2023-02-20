@@ -125,3 +125,10 @@ export const fetchErosionSuelo = (setValue) => {
       setValue(response.data.data);
     });
 };
+
+// ----------------------Formulario Clima----------------
+export const fetchLuz = (setValue) => {
+  axios.get(baseUrl + "/api/accesiones/formulario/luz").then((response) => {
+    setValue(response.data.data);
+  });
+};
