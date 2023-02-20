@@ -12,6 +12,11 @@ const PagesData = [
         title: "accesiones"
     },
     {
+        path: "/accesiones/detalles",
+        element: <Accesiones />,
+        title: "accesiones"
+    },
+    {
         path: "/usuarios",
         element: <Usuarios />,
         title: "Usuarios"
