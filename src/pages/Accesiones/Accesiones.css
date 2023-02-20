@@ -1,0 +1,96 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Aleo:ital,wght@1,700&family=Inter:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.headPrivateContainer {
+    position: absolute;
+    max-width: 1185px;
+    width: 98%;
+    height: 18%;
+    top: 0px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.AccesionesFilters {
+    display: grid;
+    grid-template-columns: 40% auto;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectAccesionIndividual {
+    display: grid;
+    grid-template-columns: 30% 50%;
+    text-align: center;
+    align-items: center;
+}
+
+.AccesionesBuscadores__Dates {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.AccesionesBuscadores {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.AccesionesFilters__Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 5px;
+    width: 179px;
+    height: 44.76px;
+    background: #0D3F1B;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.AccesionesFilters__Button:hover {
+    cursor: pointer;
+    background-color: #73DB23;
+}
+
+.AccesionesFilters__Button p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFFFFF;
+}
+
+.AccesionesFilters__Title {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 39px;
+    color: #404D61;
+    margin: 5px
+}
+
+.AccesionesFilters__Label {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #404D61;
+    margin: 5px
+}
+.table-row-link {
+    display: table-row;
+  }
+  

@@ -149,7 +149,7 @@ function CustomPaginationActionsTable() {
 
 						<TableRow key={row.codigo}>
 							<TableCell component="th" scope="row">
-								<Link to={"/accesiones/detalles/accesion"}>
+<Link to={"/accesiones/detalles/accesion"}>
 									{row.codigo}
 								</Link>
 							</TableCell>
