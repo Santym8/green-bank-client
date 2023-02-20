@@ -148,30 +148,32 @@ function CustomPaginationActionsTable() {
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
     };
-    // ---------------------EDITAR REGISTRO-----------------------------
-    const handleEditarSubmit = (newData, row) => {
+
+     // ---------------------EDITAR REGISTRO-----------------------------
+  const handleEditarSubmit = (newData, row) => {
       const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newData)
       };
-      setIsLoading(true);
-      fetch(`${apiUrl}/${row.familiaId}`, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          const rowIndex = rows.findIndex(currentRow => currentRow.familiaId === row.familiaId);
-          if (rowIndex !== -1) {
-            const updatedRows = [...rows];
-            updatedRows[rowIndex] = newData;
-            setRows(updatedRows);
-            fetchRows(); // actualizar filas
-          }
-          setEditingRow(null);
-        })
-        .catch(error => console.error(`Error al hacer la petición: ${error}`))
-        .finally(() => setIsLoading(false));
-    };
+    setIsLoading(true);
+    fetch(`${apiUrl}/${row.familiaId}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // const rowIndex = rows.findIndex(currentRow => currentRow.familiaId === row.familiaId);
+        // if (rowIndex !== -1) {
+        //   const updatedRows = [...rows];
+        //   updatedRows[rowIndex] = newData;
+        //   setRows(updatedRows);
+        //   fetchRows(); // actualizar filas
+        // }
+        fetchRows(); // actualizar filas
+        setEditingRow(null);
+      })
+      .catch(error => console.error(`Error al hacer la petición: ${error}`))
+      .finally(() => setIsLoading(false));
+  };
     // ------------------ELIMINAR REGISTRO--------------------------
     const handleEliminar = (familiaId) => {
       const requestOptions = {
@@ -185,6 +187,7 @@ function CustomPaginationActionsTable() {
           fetchRows(); // actualizar filas
         })
         .catch(error => console.error(`Error al hacer la petición: ${error}`));
+
     };
     return (
       <TableContainer component={Paper}>
