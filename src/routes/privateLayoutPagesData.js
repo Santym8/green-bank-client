@@ -1,4 +1,5 @@
 import Accesiones from "../pages/Accesiones";
+import Accesiones2 from "../pages/Accesiones/accesionesVentana2";
 import Usuarios from "../pages/Usuarios";
 import TaxonomiaGeneros from "../pages/TaxonomiaGeneros";
 import TaxonomiaFamilias from "../pages/TaxonomiaFamilias";
@@ -9,6 +10,11 @@ const PagesData = [
     {
         path: "/accesiones/detalles",
         element: <Accesiones />,
+        title: "accesiones"
+    },
+    {
+        path: "/accesiones/detalles/accesion",
+        element: <Accesiones2 />,
         title: "accesiones"
     },
     {
