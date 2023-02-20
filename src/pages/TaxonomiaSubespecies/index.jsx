@@ -20,7 +20,8 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TableHead from '@mui/material/TableHead';
-
+import { ModalCreateSubEspecies } from './ModalCreateSubEspecies';
+import { ModalUpdateSubEspecie } from './ModalUpdateSubEspecies';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 // Modal
@@ -88,39 +89,12 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(codigo, familia, genero, especie, subespecie) {
-  return { codigo, familia, genero, especie, subespecie };
-}
 
-const rows = [
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS"),
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE CHINENSIS"),
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE SCHEIDEANA"),
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE TURKANENSIS"),
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE AFRICANA"),
-].sort((a, b) => (a.familia < b.familia ? -1 : 1));
-const menuItemsFamilias = [
-  { value: 1, label: "Asteraceae" },
-  { value: 2, label: "Brasicaceae" },
-  { value: 3, label: "Cactaceae" },
-  { value: 4, label: "Rosaceae" },
-  { value: 5, label: "Liliaceae" },
-];
-const menuItemsGeneros = [
-  { value: 1, label: "Acer" },
-  { value: 2, label: "Aralia" },
-  { value: 3, label: "Aloe" },
-  { value: 4, label: "Amarathus" },
-];
-const menuItemsEspecies = [
-  { value: 1, label: "Aloe Vera" },
-  { value: 2, label: "Aloe Ferox" },
-  { value: 3, label: "Aloe Striata" },
-  { value: 4, label: "Aleo Nobilis" },
-];
 function CustomPaginationActionsTable() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  const [rows, setRows] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -134,6 +108,52 @@ function CustomPaginationActionsTable() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  //Mostrar Datos
+
+  const getOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  const fetchRows = () => {
+    const apiUrlSubEspecies =
+      "https://green-bank-api.onrender.com/api/taxonomia/subespecie";
+
+    setIsLoading(true); // establecer isLoading en verdadero justo antes de comenzar la solicitud
+    fetch(apiUrlSubEspecies, getOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        data = data.data;
+        data.sort((a, b) => (a.subespecieNombre < b.subespecieNombre ? -1 : 1));
+        setRows(data);
+        console.log(data.subespecieNombre);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setIsLoading(false)); // establecer isLoading en falso después de completar la solicitud
+  };
+
+  //DELETE
+
+  const handleEliminar = (subespecieId) => {
+    const apiUrlSubEspecies =
+      "https://green-bank-api.onrender.com/api/taxonomia/subespecie/";
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrlSubEspecies + subespecieId, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        fetchRows();
+      })
+      .catch((error) => console.error(`Error al hacer la petición: ${error}`));
+  };
+
+  React.useEffect(() => {
+    fetchRows();
+  }, []);
 
   return (
     <TableContainer component={Paper}>
@@ -153,25 +173,35 @@ function CustomPaginationActionsTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.codigo}>
+            <TableRow key={row.subespecieId}>
               <TableCell className='row-edits-icons-taxonomia' component="th" scope="row">
-                <span class="material-symbols-outlined">edit</span>
-                <span class="material-symbols-outlined">delete</span>
+                <ModalUpdateSubEspecie
+                subespecieId={row.subespecieId}
+                especieNombre={row.especieNombre}
+                familiaId={row.Especie.Genero.Familium.familiaId}
+                generoId={row.Especie.Genero.generoId}    
+                especieId={row.Especie.especieId}                            
+                />
+                <span
+                  class="material-symbols-outlined"
+                  onClick={() => handleEliminar(row.subespecieId)}
+                >delete
+                </span>
               </TableCell>
               <TableCell component="th" scope="row">
-                {row.codigo}
+                {row.subespecieId}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.familia}
+                {row.Especie.Genero.Familium.familiaNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.genero}
+                {row.Especie.Genero.generoNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.especie}
+                {row.Especie.especieNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.subespecie}
+                {row.subespecieNombre}
               </TableCell>
             </TableRow>
           ))}
@@ -184,7 +214,7 @@ function CustomPaginationActionsTable() {
         </TableBody>
         <TableFooter>
           <TableRow className='paginationTable'>
-            {ModalTaxon()}
+            <ModalCreateSubEspecies />
             <TablePagination
               rowsPerPageOptions={[]}
               colSpan={3}
@@ -201,61 +231,7 @@ function CustomPaginationActionsTable() {
     </TableContainer>
   );
 }
-function ModalTaxon() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-  return (
 
-    <div>
-      <div onClick={handleOpen} className='newFamiliasButton'>
-        <p>+  Nuevo</p>
-      </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="modalContainer" sx={style}>
-          <p className='modalContainer__Title'>Añadir Nueva Subespecie</p>
-          <div className="modalContainer__SelectsSubespecies">
-          <SelectSmall
-              title='Familia'
-              menuItems={menuItemsFamilias} />
-            <SelectSmall
-              title='Genero'
-              menuItems={menuItemsGeneros} />
-            <SelectSmall
-              title='Especie'
-              menuItems={menuItemsEspecies} />
-          </div>
-
-          <TextField className="modalContainer__Text" autoFocus="true" fullWidth="true"></TextField>
-          <div className="modalButtons">
-            <div onClick={handleClose} className='modalButtons__Anadir'>
-              <p>Añadir</p>
-            </div>
-            <div onClick={handleClose} className='modalButtons__Cancelar'>
-              <p>Cancelar</p>
-            </div>
-          </div>
-        </Box>
-      </Modal>
-    </div>
-  );
-}
 function TaxonomiaSubespecies() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -272,14 +248,23 @@ function TaxonomiaSubespecies() {
         <div className="SubespeciesFilters">
           <div className="SelectsContainer">
             <SelectSmall
-              title='Familia'
-              menuItems={menuItemsFamilias} />
+              title="familia"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/familia"
+              }
+            />
             <SelectSmall
-              title='Genero'
-              menuItems={menuItemsGeneros} />
+              title="genero"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/genero"
+              }
+            />
             <SelectSmall
-              title='Especie'
-              menuItems={menuItemsEspecies} />
+              title="especie"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/especie"
+              }
+            />
           </div>
           <div className='SubespeciesFilters__Button'>
             <p>Filtrar</p>

@@ -24,6 +24,9 @@ import TableHead from '@mui/material/TableHead';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
+import { ModalTaxon } from './AñadirRegistro';
+
+
 // Modal
 import Modal from '@mui/material/Modal';
 
@@ -89,36 +92,73 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(codigo, familia, genero) {
-  return { codigo, familia, genero };
-}
-const menuItems = [
-  { value: 1, label: "Apiaceae" },
-  { value: 2, label: "Rosaceae" },
-  { value: 3, label: "Liliaceae" },
-];
-const rows = [
-  createData(11, "FAMILIA", "ACER"),
-  createData(12, "FAMILIA", "ARALIA"),
-  createData(13, "FAMILIA", "ALOE"),
-  createData(14, "FAMILIA", "AMARANTHUS"),
-  createData(15, "FAMILIA", "ANEMONE"),
-  createData(16, "FAMILIA", "AQUILEGIA"),
-  createData(17, "FAMILIA", "ARCTOTIS"),
-  createData(18, "FAMILIA", "ARISTOLOCHIA"),
-  createData(19, "FAMILIA", "ARALIA"),
-  createData(20, "FAMILIA", "ALOE"),
-  createData(21, "FAMILIA", "AMARANTHUS"),
-  createData(22, "FAMILIA", "ANEMONE"),
-  createData(23, "FAMILIA", "AQUILEGIA"),
-  createData(24, "FAMILIA", "ARCTOTIS"),
-  createData(25, "FAMILIA", "ARISTOLOCHIA"),
+// function createData(codigo, familia, genero) {
+//   return { codigo, familia, genero };
+// }
+// const menuItems = [
+//   { value: 1, label: "Apiaceae" },
+//   { value: 2, label: "Rosaceae" },
+//   { value: 3, label: "Liliaceae" },
+// ];
+// const rows = [
+//   createData(11, "FAMILIA", "ACER"),
+//   createData(12, "FAMILIA", "ARALIA"),
+//   createData(13, "FAMILIA", "ALOE"),
+//   createData(14, "FAMILIA", "AMARANTHUS"),
+//   createData(15, "FAMILIA", "ANEMONE"),
+//   createData(16, "FAMILIA", "AQUILEGIA"),
+//   createData(17, "FAMILIA", "ARCTOTIS"),
+//   createData(18, "FAMILIA", "ARISTOLOCHIA"),
+//   createData(19, "FAMILIA", "ARALIA"),
+//   createData(20, "FAMILIA", "ALOE"),
+//   createData(21, "FAMILIA", "AMARANTHUS"),
+//   createData(22, "FAMILIA", "ANEMONE"),
+//   createData(23, "FAMILIA", "AQUILEGIA"),
+//   createData(24, "FAMILIA", "ARCTOTIS"),
+//   createData(25, "FAMILIA", "ARISTOLOCHIA"),
 
-].sort((a, b) => (a.familia < b.familia ? -1 : 1));
+// ].sort((a, b) => (a.familia < b.familia ? -1 : 1));
 
 function CustomPaginationActionsTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const getOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const apiUrlGeneros = 'https://green-bank-api.onrender.com/api/taxonomia/genero'
+
+  const fetchRows = () => {
+    setIsLoading(true); // establecer isLoading en verdadero justo antes de comenzar la solicitud
+    fetch(apiUrlGeneros, getOptions)
+      .then(response => response.json())
+      .then(data => {
+        data = data.data;
+        data.sort((a, b) => (a.generoNombre < b.generoNombre ? -1 : 1));
+        setRows(data);
+      })
+      .catch(error => console.error(error))
+      .finally(() => setIsLoading(false)); // establecer isLoading en falso después de completar la solicitud
+  }
+
+  // ------------------ELIMINAR REGISTRO-------------------------- 
+  const handleEliminar = (generoId) => {
+    const requestOptions = { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, };
+    fetch(`${apiUrlGeneros}/${generoId}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {      // 
+        console.log(data);
+        fetchRows(); // actualizar filas    
+      }).catch(error => console.error(`Error al hacer la petición: ${error}`));
+  };
+
+  React.useEffect(() => {
+    fetchRows();
+  }, []);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -149,19 +189,21 @@ function CustomPaginationActionsTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.codigo}>
+            <TableRow key={row.generoId}>
               <TableCell className='row-edits-icons-taxonomia' component="th" scope="row">
                 <span class="material-symbols-outlined">edit</span>
-                <span class="material-symbols-outlined">delete</span>
+                <span class="material-symbols-outlined" onClick={() => handleEliminar(row.generoId)}>delete</span >
               </TableCell>
               <TableCell component="th" scope="row">
-                {row.codigo}
+                {row.generoId}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.familia}
+                {
+                  row.Familium ? row.Familium.familiaNombre : "null"
+                }
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.genero}
+                {row.generoNombre}
               </TableCell>
             </TableRow>
           ))}
@@ -174,7 +216,7 @@ function CustomPaginationActionsTable() {
         </TableBody>
         <TableFooter>
           <TableRow className='paginationTable'>
-            {ModalTaxon()}
+            <ModalTaxon/>
             <TablePagination
               rowsPerPageOptions={[]}
               colSpan={3}
@@ -191,57 +233,9 @@ function CustomPaginationActionsTable() {
     </TableContainer>
   );
 }
-function ModalTaxon() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-  return (
 
-    <div>
-      <div onClick={handleOpen} className='newFamiliasButton'>
-        <p>+  Nuevo</p>
-      </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="modalContainer" sx={style}>
-          <p className='modalContainer__Title'>Añadir Nuevo Género</p>
-          <div className="modalContainer__SelectGenero">
-            <SelectSmall
-              title='Familia'
-              menuItems={menuItems} />
-          </div>
-          <TextField className="modalContainer__Text" autoFocus="true" fullWidth="true"></TextField>
-          <div className="modalButtons">
-            <div onClick={handleClose} className='modalButtons__Anadir'>
-              <p>Añadir</p>
-            </div>
-            <div onClick={handleClose} className='modalButtons__Cancelar'>
-              <p>Cancelar</p>
-            </div>
-          </div>
-        </Box>
-      </Modal>
-    </div>
-  );
-}
 function TaxonomiaGeneros() {
   const [searchTerm, setSearchTerm] = useState("");
-
   return (
     <>
       <div className='headPrivateContainer'>
@@ -254,8 +248,9 @@ function TaxonomiaGeneros() {
       <div className='taxonomiaGenerosContainer'>
         <div className="GenerosFilters">
           <SelectSmall
-            title='Familia'
-            menuItems={menuItems} />
+          idSelect='idSelect'
+            title='familia'
+            apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/familia'} />
           <div className='GenerosFilters__Button'>
             <p>Filtrar</p>
           </div>
