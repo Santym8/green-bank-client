@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { formInitialValues, validacionDatos } from "./dataForm";
-import { FormularioAccesionTaxonomia } from "./FormularioAccesionTaxonomia";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import * as Yup from "yup";
-
 import {
   Box,
   Stepper,
@@ -14,8 +13,12 @@ import {
   FormHelperText,
   Button,
 } from "@mui/material";
+import { formInitialValues, validacionDatos } from "./dataForm";
+import { FormularioAccesionTaxonomia } from "./FormularioAccesionTaxonomia";
+import { FormularioAccesionRecoleccion } from "./FormularioAccesionRecoleccion";
+import { FormularioAccesionSuelo } from "./FormularioAccesionSuelo";
 
-const steps = ["Taxonomía", "Recolección", "Review and Submit"];
+const steps = ["Taxonomía", "Recolección", "Suelo"];
 
 const FormularioRegistroAccesiones = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -33,7 +36,7 @@ const FormularioRegistroAccesiones = () => {
     onSubmit: (values) => {
       if (activeStep === steps.length - 1) {
         //-----------Hacer POST---------
-        console.log(JSON.stringify(values, null, 2));
+        console.log(JSON.stringify(formik.values, null, 2));
       } else {
         setActiveStep((prevStep) => prevStep + 1);
       }
@@ -45,9 +48,9 @@ const FormularioRegistroAccesiones = () => {
       case 0:
         return <FormularioAccesionTaxonomia formik={formik} />;
       case 1:
-      // return <PersonalInfo formik={formik} />;
+        return <FormularioAccesionRecoleccion formik={formik} />;
       case 2:
-      // return <ReviewInfo formik={formik} />;
+      return <FormularioAccesionSuelo formik={formik} />;
       default:
         return <div>404: Not Found</div>;
     }
@@ -69,7 +72,9 @@ const FormularioRegistroAccesiones = () => {
       </Stepper>
       <Grid container>
         <Grid item xs={12} sx={{ padding: "20px" }}>
-          {formContent(activeStep)}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            {formContent(activeStep)}
+          </LocalizationProvider>
         </Grid>
         {formik.errors.submit && (
           <Grid item xs={12}>

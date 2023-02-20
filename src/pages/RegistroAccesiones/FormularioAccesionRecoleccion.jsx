@@ -1,133 +1,146 @@
 import React from "react";
-import { Grid, TextField, FormHelperText } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { fetchInstitutoColector } from "./fetchData";
+
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import {
-  fetchFamilia,
-  fetchGenero,
-  fetchEspecie,
-  fetchSubespecie,
-  fetchNombreLocal,
-} from "./fetchData";
+import {} from "./fetchData";
 
-export const FormularioAccesionTaxonomia = (props) => {
-  const [dataFamilia, setdataFamilia] = React.useState([]);
-  const [dataGenero, setdataGenero] = React.useState([]);
-  const [dataEspecie, setdataEspecie] = React.useState([]);
-  const [dataSubespecie, setSubespecie] = React.useState([]);
-  const [dataNombreLocal, setdataNombreLocal] = React.useState([]);
-
+export const FormularioAccesionRecoleccion = (props) => {
   const { formik } = props;
+  const [dataInstitutoColector, setdataInstitutoColector] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchInstitutoColector(setdataInstitutoColector);
+  }, []);
 
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Select
-          id="familiaId"
-          label="Familia"
-          name="familiaId"
-          value={formik.values.familiaId}
+        <TextField
+          id="recoleccionNombre"
+          label="Nombre Recolector"
+          name="recoleccionNombre"
+          value={formik.values.recoleccionNombre}
           onChange={formik.handleChange}
-          onOpen={(event) => {
-            fetchFamilia(setdataFamilia);
-          }}
-        >
-          {dataFamilia.map((menuItem) => (
-            <MenuItem key={menuItem.familiaId} value={menuItem.familiaId}>
-              {menuItem.familiaNombre}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-      <Grid item xs={12}>
-        <Select
-          id="generoId"
-          label="Genero"
-          name="generoId"
-          value={formik.values.generoId}
+          variant="outlined"
+        />
+        <TextField
+          id="recoleccionApellidos"
+          label="Apellido Recolector"
+          name="ecoleccionApellidos"
+          value={formik.values.recoleccionApellidos}
           onChange={formik.handleChange}
-          onOpen={(event) => {
-            fetchGenero(setdataGenero, formik.values.familiaId);
+          variant="outlined"
+        />
+        <DesktopDatePicker
+          id="recoleccionFecha"
+          name="recoleccionFecha"
+          label="Fecha Recolección"
+          inputFormat="DD/MM/YYYY"
+          value={formik.values.recoleccionFecha}
+          onChange={(value) => {
+            formik.setFieldValue("recoleccionFecha", value);
           }}
-        >
-          {dataGenero.map((menuItem) => (
-            <MenuItem key={menuItem.generoId} value={menuItem.generoId}>
-              {menuItem.generoNombre}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-      <Grid item xs={12}>
+          renderInput={(params) => <TextField {...params} />}
+        />
         <Select
-          id="especieId"
-          label="Especie"
-          name="especieId"
-          value={formik.values.especieId}
+          id="institutoColectorId"
+          label="Instituto Colector"
+          name="institutoColectorId"
+          value={formik.values.institutoColectorId}
           onChange={formik.handleChange}
-          onOpen={(event) => {
-            fetchEspecie(
-              setdataEspecie,
-              formik.values.familiaId,
-              formik.values.generoId
-            );
-          }}
         >
-          {dataEspecie.map((menuItem) => (
-            <MenuItem key={menuItem.especieId} value={menuItem.especieId}>
-              {menuItem.especieNombre}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-      <Grid item xs={12}>
-        <Select
-          id="subespecieId"
-          label="Subespecie"
-          name="subespecieId"
-          value={formik.values.subespecieId}
-          onChange={formik.handleChange}
-          onOpen={(event) => {
-            fetchSubespecie(
-              setSubespecie,
-              formik.values.familiaId,
-              formik.values.generoId,
-              formik.values.especieId
-            );
-          }}
-        >
-          {dataSubespecie.map((menuItem) => (
-            <MenuItem key={menuItem.subespecieId} value={menuItem.subespecieId}>
-              {menuItem.subespecieNombre}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-      <Grid item xs={12}>
-        <Select
-          id="nombreLocalId"
-          label="NombreLocal"
-          name="nombreLocalId"
-          value={formik.values.nombreLocalId}
-          onChange={formik.handleChange}
-          onOpen={(event) => {
-            fetchNombreLocal(
-              setdataNombreLocal,
-              formik.values.familiaId,
-              formik.values.generoId,
-              formik.values.especieId,
-              formik.values.subespecieId
-            );
-          }}
-        >
-          {dataNombreLocal.map((menuItem) => (
+          {dataInstitutoColector.map((menuItem) => (
             <MenuItem
-              key={menuItem.nombreLocalId}
-              value={menuItem.nombreLocalId}
+              key={menuItem.institutoColectorId}
+              value={menuItem.institutoColectorId}
             >
-              {menuItem.nombreLocalNombre}
+              {menuItem.institutoColectorNombre}
             </MenuItem>
           ))}
         </Select>
+        <TextField
+          id="ubicacionRecoleccionGrupoEtnico"
+          label="Grupo Etnico"
+          name="ubicacionRecoleccionGrupoEtnico"
+          value={formik.values.ubicacionRecoleccionGrupoEtnico}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoIdioma"
+          label="Idioma"
+          name="ubicacionRecoleccionGrupoIdioma"
+          value={formik.values.ubicacionRecoleccionGrupoIdioma}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoPais"
+          label="Pais"
+          name="ubicacionRecoleccionGrupoPais"
+          value={formik.values.ubicacionRecoleccionGrupoPais}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoProvincia"
+          label="Provincia"
+          name="ubicacionRecoleccionGrupoProvincia"
+          value={formik.values.ubicacionRecoleccionGrupoProvincia}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoCanton"
+          label="Cantón"
+          name="ubicacionRecoleccionGrupoCanton"
+          value={formik.values.ubicacionRecoleccionGrupoCanton}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoParroquia"
+          label="Parroquia"
+          name="ubicacionRecoleccionGrupoParroquia"
+          value={formik.values.ubicacionRecoleccionGrupoParroquia}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoLocalidad"
+          label="Localidad"
+          name="ubicacionRecoleccionGrupoLocalidad"
+          value={formik.values.ubicacionRecoleccionGrupoLocalidad}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoNombrePredio"
+          label="Nombre Predio"
+          name="ubicacionRecoleccionGrupoNombrePredio"
+          value={formik.values.ubicacionRecoleccionGrupoNombrePredio}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoPropietario"
+          label="Nombre Propietario"
+          name="ubicacionRecoleccionGrupoPropietario"
+          value={formik.values.ubicacionRecoleccionGrupoPropietario}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
+        <TextField
+          id="ubicacionRecoleccionGrupoLocalizacion"
+          label="Localización"
+          name="ubicacionRecoleccionGrupoLocalizacion"
+          value={formik.values.ubicacionRecoleccionGrupoLocalizacion}
+          onChange={formik.handleChange}
+          variant="outlined"
+        />
       </Grid>
     </Grid>
   );

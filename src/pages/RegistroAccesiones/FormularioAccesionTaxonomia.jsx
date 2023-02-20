@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, TextField, FormHelperText } from "@mui/material";
+import { Grid, TextField, FormHelperText, InputLabel } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import {
@@ -22,9 +22,10 @@ export const FormularioAccesionTaxonomia = (props) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
+        <InputLabel id="familiaIdLabel">Familia</InputLabel>
         <Select
           id="familiaId"
-          label="Familia"
+          labelId="familiaIdLabel"
           name="familiaId"
           value={formik.values.familiaId}
           onChange={formik.handleChange}
@@ -40,9 +41,10 @@ export const FormularioAccesionTaxonomia = (props) => {
         </Select>
       </Grid>
       <Grid item xs={12}>
+        <InputLabel id="generoIdLabel">Genero</InputLabel>
         <Select
           id="generoId"
-          label="Genero"
+          labelId="generoIdLabel"
           name="generoId"
           value={formik.values.generoId}
           onChange={formik.handleChange}
@@ -58,9 +60,10 @@ export const FormularioAccesionTaxonomia = (props) => {
         </Select>
       </Grid>
       <Grid item xs={12}>
+        <InputLabel id="especieIdLabel">Especie</InputLabel>
         <Select
           id="especieId"
-          label="Especie"
+          labelId="especieIdLabel"
           name="especieId"
           value={formik.values.especieId}
           onChange={formik.handleChange}
@@ -80,9 +83,9 @@ export const FormularioAccesionTaxonomia = (props) => {
         </Select>
       </Grid>
       <Grid item xs={12}>
+        <InputLabel id="subespecieIdLabel">Subespecie</InputLabel>
         <Select
-          id="subespecieId"
-          label="Subespecie"
+          labelId="subespecieIdLabel"
           name="subespecieId"
           value={formik.values.subespecieId}
           onChange={formik.handleChange}
@@ -103,9 +106,10 @@ export const FormularioAccesionTaxonomia = (props) => {
         </Select>
       </Grid>
       <Grid item xs={12}>
+        <InputLabel id="nombreLocalLabel">Nombre Local</InputLabel>
         <Select
-          id="nombreLocalId"
-          label="NombreLocal"
+          label="Nombre Local"
+          labelId="nombreLocalLabel"
           name="nombreLocalId"
           value={formik.values.nombreLocalId}
           onChange={formik.handleChange}

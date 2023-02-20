@@ -7,7 +7,7 @@ export const formInitialValues = {
   especieId: null,
   generoId: null,
   familiaId: null,
-  
+
   estadoAccesionId: null,
 
   recoleccionNombre: null,
