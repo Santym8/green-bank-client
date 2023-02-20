@@ -21,6 +21,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TableHead from '@mui/material/TableHead';
 
+import { ModalCreateNombresLocales } from './ModalCreateNombresLocales';
+import { ModalUpdateNombresLocales } from './ModalUpdateNombresLocales';
+
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 // Modal
@@ -88,46 +91,11 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(codigo, familia, genero, especie, subespecie, nombreLocal) {
-  return { codigo, familia, genero, especie, subespecie, nombreLocal };
-}
-
-const rows = [
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "ALOE"),
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "SAVILA"),
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "ZAVILA"),
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "XAVILA"),
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA", "ALOE BARBADENSIS", "PENCO"),
-].sort((a, b) => (a.familia < b.familia ? -1 : 1));
-const menuItemsFamilias = [
-  { value: 1, label: "Asteraceae" },
-  { value: 2, label: "Brasicaceae" },
-  { value: 3, label: "Cactaceae" },
-  { value: 4, label: "Rosaceae" },
-  { value: 5, label: "Liliaceae" },
-];
-const menuItemsGeneros = [
-  { value: 1, label: "Acer" },
-  { value: 2, label: "Aralia" },
-  { value: 3, label: "Aloe" },
-  { value: 4, label: "Amarathus" },
-];
-const menuItemsEspecies = [
-  { value: 1, label: "Aloe Vera" },
-  { value: 2, label: "Aloe Ferox" },
-  { value: 3, label: "Aloe Striata" },
-  { value: 4, label: "Aloe Nobilis" },
-];
-const menuItemsSubespecies = [
-  { value: 1, label: "Aloe Barbadensis" },
-  { value: 2, label: "Aloe Chinensis" },
-  { value: 3, label: "Aloe Scheideana" },
-  { value: 4, label: "Aloe Turkanensis" },
-  { value: 5, label: "Aloe Africana" },
-];
 function CustomPaginationActionsTable() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  const [rows, setRows] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -141,6 +109,52 @@ function CustomPaginationActionsTable() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  //Mostrar Datos
+
+  const getOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
+  const fetchRows = () => {
+    const apiUrlNombresLocales =
+      "https://green-bank-api.onrender.com/api/taxonomia/nombre-local";
+
+    setIsLoading(true); // establecer isLoading en verdadero justo antes de comenzar la solicitud
+    fetch(apiUrlNombresLocales, getOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        data = data.data;
+        data.sort((a, b) => (a.nombreLocalNombre < b.nombreLocalNombre ? -1 : 1));
+        setRows(data);
+        console.log(data.nombreLocalNombre);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setIsLoading(false)); // establecer isLoading en falso después de completar la solicitud
+  };
+
+  //DELETE
+
+  const handleEliminar = (nombreLocalId) => {
+    const apiUrlNombresLocales =
+      "https://green-bank-api.onrender.com/api/taxonomia/nombre-local/";
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrlNombresLocales + nombreLocalId, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        fetchRows();
+      })
+      .catch((error) => console.error(`Error al hacer la petición: ${error}`));
+  };
+
+  React.useEffect(() => {
+    fetchRows();
+  }, []);
 
   return (
     <TableContainer component={Paper}>
@@ -161,28 +175,41 @@ function CustomPaginationActionsTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.codigo}>
-              <TableCell className='row-edits-icons-taxonomia' component="th" scope="row">
-                <span class="material-symbols-outlined">edit</span>
-                <span class="material-symbols-outlined">delete</span>
+            <TableRow key={row.nombreLocalId}>
+              <TableCell
+                className='row-edits-icons-taxonomia'
+                component="th"
+                scope="row">
+                <ModalUpdateNombresLocales
+                  familiaId={row.Subespecie.Especie.Genero.Familium.familiaId}
+                  generoId={row.Subespecie.Especie.Genero.generoId}
+                  especieId={row.Subespecie.Especie.especieId}
+                  subespecieId={row.Subespecie.subespecieId}
+                  nombreLocalId={row.nombreLocalId}
+                  nombreLocalNombre={row.nombreLocalNombre}
+                />
+                <span
+                  class="material-symbols-outlined"
+                  onClick={() => handleEliminar(row.nombreLocalId)}
+                >delete</span>
               </TableCell>
               <TableCell component="th" scope="row">
-                {row.codigo}
+                {row.nombreLocalId}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.familia}
+                {row.Subespecie.Especie.Genero.Familium.familiaNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.genero}
+                {row.Subespecie.Especie.Genero.generoNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.especie}
+                {row.Subespecie.Especie.especieNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.subespecie}
+                {row.Subespecie.subespecieNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.nombreLocal}
+                {row.nombreLocalNombre}
               </TableCell>
             </TableRow>
           ))}
@@ -195,7 +222,7 @@ function CustomPaginationActionsTable() {
         </TableBody>
         <TableFooter>
           <TableRow className='paginationTable'>
-            {ModalTaxon()}
+            <ModalCreateNombresLocales />
             <TablePagination
               rowsPerPageOptions={[]}
               colSpan={3}
@@ -212,64 +239,7 @@ function CustomPaginationActionsTable() {
     </TableContainer>
   );
 }
-function ModalTaxon() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-  return (
 
-    <div>
-      <div onClick={handleOpen} className='newFamiliasButton'>
-        <p>+  Nuevo</p>
-      </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="modalContainer" sx={style}>
-          <p className='modalContainer__Title'>Añadir Nuevo Nombre Local</p>
-          <div className="modalContainer__SelectsNombresLocales">
-            <SelectSmall
-              title='Familia'
-              menuItems={menuItemsFamilias} />
-            <SelectSmall
-              title='Genero'
-              menuItems={menuItemsGeneros} />
-            <SelectSmall
-              title='Especie'
-              menuItems={menuItemsEspecies} />
-            <SelectSmall
-              title='Subespecie'
-              menuItems={menuItemsSubespecies} />
-          </div>
-
-          <TextField className="modalContainer__Text" autoFocus="true" fullWidth="true"></TextField>
-          <div className="modalButtons">
-            <div onClick={handleClose} className='modalButtons__Anadir'>
-              <p>Añadir</p>
-            </div>
-            <div onClick={handleClose} className='modalButtons__Cancelar'>
-              <p>Cancelar</p>
-            </div>
-          </div>
-        </Box>
-      </Modal>
-    </div>
-  );
-}
 function TaxonomiaNombresLocales() {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -286,17 +256,29 @@ function TaxonomiaNombresLocales() {
         <div className="nombresLocalesFilters">
           <div className="SelectsContainer">
             <SelectSmall
-              title='Familia'
-              menuItems={menuItemsFamilias} />
+              title="familia"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/familia"
+              }
+            />
             <SelectSmall
-              title='Genero'
-              menuItems={menuItemsGeneros} />
+              title="genero"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/genero"
+              }
+            />
             <SelectSmall
-              title='Especie'
-              menuItems={menuItemsEspecies} />
+              title="especie"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/especie"
+              }
+            />
             <SelectSmall
-              title='Subespecie'
-              menuItems={menuItemsSubespecies} />
+              title="subespecie"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/subespecie"
+              }
+            />
           </div>
           <div className='nombresLocalesFilters__Button'>
             <p>Filtrar</p>
