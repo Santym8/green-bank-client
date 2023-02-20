@@ -1,6 +1,6 @@
 import React from 'react';
 import HeadPrivateLayout from '../../components/HeadPrivateLayout/HeadPrivateLayout';
-import './accesiones.css';
+import './Accesiones.css';
 import './accesionesVentana2.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import SpeedIcon from '@mui/icons-material/Speed';
 import YardIcon from '@mui/icons-material/Yard';
+
 function AccesionElejir() {
     return (
         <>

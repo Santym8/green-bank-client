@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Aleo:ital,wght@1,700&family=Inter:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -11,48 +12,42 @@
     grid-template-columns: auto auto;
 }
 
-.taxonomiaEspeciesContainer {
-    display: grid;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1.48498px solid #E0E1EC;
-    border-radius: 8.90991px;
-    height: 100%;
-    width: 96%;
-    justify-content: center;
-    grid-template-rows: 34% auto;
-
-}
-
 .AccesionesFilters {
-    width: 50%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 40% auto;
+    width: 95%;
+    justify-content: center;
+    align-items: center;
 }
 
-.SelectsContainerAccesiones {
-    margin-top: 20px;
-    margin-bottom: 20px;
+.selectAccesionIndividual {
+    display: grid;
+    grid-template-columns: 30% 50%;
+    text-align: center;
+    align-items: center;
 }
 
-.Accesiones_Buscadores{
+.AccesionesBuscadores__Dates {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.AccesionesBuscadores {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.SelectsContainerAccesiones .title_date_start h1 {
-    font-size: 20px;
-}
-
-.SelectsContainerAccesiones .title_date_finish h1 {
-    font-size: 20px;
-}
-
-.UserFilters__Button {
+.AccesionesFilters__Button {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2px 5px;
     width: 179px;
-    height: 40.76px;
+    height: 44.76px;
     background: #0D3F1B;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 4px;
@@ -60,12 +55,12 @@
     margin-right: auto;
 }
 
-.UserFilters__Button:hover {
+.AccesionesFilters__Button:hover {
     cursor: pointer;
     background-color: #73DB23;
 }
 
-.UserFilters__Button p {
+.AccesionesFilters__Button p {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
@@ -77,73 +72,25 @@
     color: #FFFFFF;
 }
 
-.EspeciesFilters__Title {
+.AccesionesFilters__Title {
     text-align: center;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 24px;
     line-height: 39px;
-    text-align: center;
     color: #404D61;
     margin: 5px
 }
 
-.search-container_user {
-    width: 50%;
-    margin: 0 auto;
-}
-
-.EspeciesFilters__Search {
-    width: 100%;
-}
-
-.row-edits-icons-taxonomia span {
-    margin: 0px 10px;
-    border-radius: 100%;
-}
-
-.row-edits-icons-taxonomia span:hover {
-    cursor: pointer;
-    background-color: #404d6175;
-}
-
-.newUsuarioButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 6px 6px 8px;
-    width: 103px;
-    height: 36px;
-    margin-top: 8px;
-    margin-left: 8px;
-    margin-bottom: 8px;
-    background: #0D3F1B;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-}
-
-.newUsuarioButton p {
+.AccesionesFilters__Label {
     text-align: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 1.25px;
-    text-transform: uppercase;
-    color: #E0ECDD;
+    font-size: 18px;
+    color: #404D61;
+    margin: 5px
 }
-
-.newUsuarioButton:hover {
-    cursor: pointer;
-    background-color: #73DB23;
-}
-
-.taxonomiaEspeciesContainer__table {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-}
-
-.AccesionesContainer {
-    width: 75%;
-    margin: 0 auto;
-}
+.table-row-link {
+    display: table-row;
+  }
+  
