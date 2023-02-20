@@ -174,7 +174,7 @@ function CustomPaginationActionsTable() {
                   onClick={() => handleEliminar(row.generoId)}
                 >
                   delete
-                </span>
+                </span>           
               </TableCell>
               <TableCell component="th" scope="row">
                 {row.generoId}
@@ -216,7 +216,6 @@ function CustomPaginationActionsTable() {
 
 function TaxonomiaGeneros() {
   const [searchTerm, setSearchTerm] = useState("");
-
   return (
     <>
       <div className='headPrivateContainer'>
