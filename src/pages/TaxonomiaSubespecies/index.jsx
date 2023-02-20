@@ -177,7 +177,7 @@ function CustomPaginationActionsTable() {
               <TableCell className='row-edits-icons-taxonomia' component="th" scope="row">
                 <ModalUpdateSubEspecie
                 subespecieId={row.subespecieId}
-                especieNombre={row.especieNombre}
+                subespecieNombre={row.subespecieNombre}
                 familiaId={row.Especie.Genero.Familium.familiaId}
                 generoId={row.Especie.Genero.generoId}    
                 especieId={row.Especie.especieId}                            
