@@ -1,30 +1,29 @@
-import React from 'react';
-import HeadPrivateLayout from '../../components/HeadPrivateLayout/HeadPrivateLayout';
-import SelectSmall from '../../components/SelectSmall/SelectSmall';
-import './TaxonomiaEspecies.css';
+import React from "react";
+import HeadPrivateLayout from "../../components/HeadPrivateLayout/HeadPrivateLayout";
+import SelectSmall from "../../components/SelectSmall/SelectSmall";
+import "./TaxonomiaEspecies.css";
 import TextField from "@mui/material/TextField";
-import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import TableHead from '@mui/material/TableHead';
-import CampoDeTexto from '../../components/TextField/CampoDeTexto';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-// Modal
-import Modal from '@mui/material/Modal';
+import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableFooter from "@mui/material/TableFooter";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import TableHead from "@mui/material/TableHead";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import { ModalCreateEspecie } from "./ModalCreateEspecies";
+import { ModalUpdateEspecie } from "./ModalUpdateEspecies";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -47,35 +46,42 @@ function TablePaginationActions(props) {
   };
 
   return (
-
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </Box>
   );
@@ -88,34 +94,6 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-// function createData(codigo, familia, genero, especie) {
-//   return { codigo, familia, genero, especie };
-// }
-
-// const rows = [
-//   createData(21, "ALOACEAE", "ALOE", "ALOE VERA"),
-//   createData(22, "ALOACEAE", "ALOE", "ALOE FEROX"),
-//   createData(23, "ALOACEAE", "ALOE", "ALOE STRIATA"),
-//   createData(24, "ALOACEAE", "ALOE", "ALOE NOBILIS"),
-//   createData(25, "ALOACEAE", "ALOE", "ALOE SPECIOSA"),
-//   createData(26, "ALOACEAE", "ALOE", "ALOE MARLOTHII"),
-//   createData(27, "ALOACEAE", "ALOE", "ALOE SUPRALEVIS"),
-//   createData(28, "ALOACEAE", "ALOE", "ALOE PERRYI"),
-
-// ].sort((a, b) => (a.familia < b.familia ? -1 : 1));
-// const menuItemsFamilias = [
-//   { value: 1, label: "Asteraceae" },
-//   { value: 2, label: "Brasicaceae" },
-//   { value: 3, label: "Cactaceae" },
-//   { value: 4, label: "Rosaceae" },
-//   { value: 5, label: "Liliaceae" },
-// ];
-// const menuItemsGeneros = [
-//   { value: 1, label: "Acer" },
-//   { value: 2, label: "Aralia" },
-//   { value: 3, label: "Aloe" },
-//   { value: 4, label: "Amarathus" },
-// ];
 function CustomPaginationActionsTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
@@ -123,18 +101,37 @@ function CustomPaginationActionsTable() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const fetchRows = () => {
+    const apiUrlEspecies =
+      "https://green-bank-api.onrender.com/api/taxonomia/especie";
+
     setIsLoading(true); // establecer isLoading en verdadero justo antes de comenzar la solicitud
     fetch(apiUrlEspecies, getOptions)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         data = data.data;
         data.sort((a, b) => (a.especieNombre < b.especieNombre ? -1 : 1));
         setRows(data);
         console.log(data.especieNombre);
       })
-      .catch(error => console.error(error))
+      .catch((error) => console.error(error))
       .finally(() => setIsLoading(false)); // establecer isLoading en falso después de completar la solicitud
-  }
+  };
+
+  const handleEliminar = (especieId) => {
+    const apiUrlEspecies =
+      "https://green-bank-api.onrender.com/api/taxonomia/especie/";
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(apiUrlEspecies + especieId, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        fetchRows();
+      })
+      .catch((error) => console.error(`Error al hacer la petición: ${error}`));
+  };
 
   React.useEffect(() => {
     fetchRows();
@@ -154,22 +151,22 @@ function CustomPaginationActionsTable() {
   };
 
   const getOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
   };
-
-  const apiUrlEspecies = 'https://green-bank-api.onrender.com/api/taxonomia/especie';
-
-
 
   return (
     <TableContainer component={Paper}>
-      <Table className='tableEspecies' sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <Table
+        className="tableEspecies"
+        sx={{ minWidth: 500 }}
+        aria-label="custom pagination table"
+      >
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
-            <TableCell align='left'>Código Especie</TableCell>
-            <TableCell align='left'>Familia</TableCell>
+            <TableCell align="left">Código Especie</TableCell>
+            <TableCell align="left">Familia</TableCell>
             <TableCell align="left">Género</TableCell>
             <TableCell align="left">Especie</TableCell>
           </TableRow>
@@ -180,9 +177,25 @@ function CustomPaginationActionsTable() {
             : rows
           ).map((row) => (
             <TableRow key={row.especieId}>
-              <TableCell className='row-edits-icons-taxonomia' component="th" scope="row">
-                <span class="material-symbols-outlined">edit</span>
-                <span class="material-symbols-outlined">delete</span>
+              <TableCell
+                className="row-edits-icons-taxonomia"
+                component="th"
+                scope="row"
+              >
+                <div>
+                  <ModalUpdateEspecie
+                    especieId={row.especieId}
+                    especieNombre={row.especieNombre}
+                    familiaId={row.Genero.Familium.familiaId}
+                    generoId={row.Genero.generoId}
+                  />
+                  <span
+                    class="material-symbols-outlined"
+                    onClick={() => handleEliminar(row.especieId)}
+                  >
+                    delete
+                  </span>
+                </div>
               </TableCell>
               <TableCell component="th" scope="row">
                 {row.especieId}
@@ -206,8 +219,8 @@ function CustomPaginationActionsTable() {
           )}
         </TableBody>
         <TableFooter>
-          <TableRow className='paginationTable'>
-            {ModalTaxon()}
+          <TableRow className="paginationTable">
+            <ModalCreateEspecie />
             <TablePagination
               rowsPerPageOptions={[]}
               colSpan={3}
@@ -224,121 +237,37 @@ function CustomPaginationActionsTable() {
     </TableContainer>
   );
 }
-function ModalTaxon(fetchRows) {
 
-  const apiUrlEspecies = 'https://green-bank-api.onrender.com/api/taxonomia/especie';
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [familiaId, setFamiliaId] = useState('');
-  const [especieNombre, setEspecieNombre] = useState('');
-  const [generoId, setGeneroId] = useState('');
-  
-  const handleEnviado = () => {
-    console.log(familiaId, "Familia");
-    console.log(generoId, "Genero");
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "especieNombre": especieNombre,
-        "generoId": generoId
-      })
-    };
-    fetch(apiUrlEspecies, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        handleClose() // cerrar modal
-        window.location.reload()
-      })
-      .catch(error => console.error(`Error al hacer la petición: ${error}`))
-      ;    
-  };
-
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-  return (
-
-    <div>
-      <div onClick={handleOpen} className='newFamiliasButton'>
-        <p>+  Nuevo</p>
-      </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="modalContainer" sx={style}>
-          <p className='modalContainer__Title'>Añadir Nueva Especie</p>
-          <div className="modalContainer__SelectsEspecies">
-            <SelectSmall
-              value={familiaId}
-              setValue={setFamiliaId}
-              title='familia'
-              apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/familia'} />
-            <SelectSmall
-              value={generoId}
-              setValue={setGeneroId}
-              title='genero'
-              apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/genero'} />
-          </div>
-
-          <CampoDeTexto 
-          value={especieNombre}
-          setValue={setEspecieNombre}
-          />
-          <div className="modalButtons">
-            <div onClick={handleEnviado} className='modalButtons__Anadir'>
-              <p>Añadir</p>
-            </div>
-            <div onClick={handleClose} className='modalButtons__Cancelar'>
-              <p>Cancelar</p>
-            </div>
-          </div>
-        </Box>
-      </Modal>
-    </div>
-  );
-}
 function TaxonomiaEspecies() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <>
-      <div className='headPrivateContainer'>
-        <HeadPrivateLayout
-          title='Taxonomía Especies'
-          icon='Park'
-          user='FL'
-        />
+      <div className="headPrivateContainer">
+        <HeadPrivateLayout title="Taxonomía Especies" icon="Park" user="FL" />
       </div>
-      <div className='taxonomiaEspeciesContainer'>
+      <div className="taxonomiaEspeciesContainer">
         <div className="EspeciesFilters">
           <div className="SelectsContainer">
             <SelectSmall
-              title='familia'
-              apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/familia'} />
+              title="familia"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/familia"
+              }
+            />
             <SelectSmall
-              title='genero'
-              apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/genero'} />
+              title="genero"
+              apiUrl={
+                "https://green-bank-api.onrender.com/api/taxonomia/genero"
+              }
+            />
           </div>
-          <div className='EspeciesFilters__Button'>
+          <div className="EspeciesFilters__Button">
             <p>Filtrar</p>
           </div>
-          <p className='EspeciesFilters__Title'>o Buscar Especie</p>
+          <p className="EspeciesFilters__Title">o Buscar Especie</p>
           <TextField
-            className='EspeciesFilters__Search'
+            className="EspeciesFilters__Search"
             id="standard-search"
             label="Buscar"
             type="search"
@@ -348,10 +277,13 @@ function TaxonomiaEspecies() {
             onChange={(event) => setSearchTerm(event.target.value)}
             InputProps={{
               endAdornment: (
-                <InputAdornment position='end' classes={{ root: 'MuiInputAdornment-root' }}>
+                <InputAdornment
+                  position="end"
+                  classes={{ root: "MuiInputAdornment-root" }}
+                >
                   <span class="material-symbols-outlined">search</span>
                 </InputAdornment>
-              )
+              ),
             }}
           />
         </div>
@@ -360,10 +292,8 @@ function TaxonomiaEspecies() {
           {CustomPaginationActionsTable()}
         </div>
       </div>
-
     </>
   );
 }
-
 
 export default TaxonomiaEspecies;
