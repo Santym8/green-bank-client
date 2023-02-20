@@ -20,7 +20,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TableHead from '@mui/material/TableHead';
-
+import CampoDeTexto from '../../components/TextField/CampoDeTexto';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 // Modal
@@ -88,37 +88,57 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(codigo, familia, genero, especie) {
-  return { codigo, familia, genero, especie };
-}
+// function createData(codigo, familia, genero, especie) {
+//   return { codigo, familia, genero, especie };
+// }
 
-const rows = [
-  createData(21, "ALOACEAE", "ALOE", "ALOE VERA"),
-  createData(22, "ALOACEAE", "ALOE", "ALOE FEROX"),
-  createData(23, "ALOACEAE", "ALOE", "ALOE STRIATA"),
-  createData(24, "ALOACEAE", "ALOE", "ALOE NOBILIS"),
-  createData(25, "ALOACEAE", "ALOE", "ALOE SPECIOSA"),
-  createData(26, "ALOACEAE", "ALOE", "ALOE MARLOTHII"),
-  createData(27, "ALOACEAE", "ALOE", "ALOE SUPRALEVIS"),
-  createData(28, "ALOACEAE", "ALOE", "ALOE PERRYI"),
+// const rows = [
+//   createData(21, "ALOACEAE", "ALOE", "ALOE VERA"),
+//   createData(22, "ALOACEAE", "ALOE", "ALOE FEROX"),
+//   createData(23, "ALOACEAE", "ALOE", "ALOE STRIATA"),
+//   createData(24, "ALOACEAE", "ALOE", "ALOE NOBILIS"),
+//   createData(25, "ALOACEAE", "ALOE", "ALOE SPECIOSA"),
+//   createData(26, "ALOACEAE", "ALOE", "ALOE MARLOTHII"),
+//   createData(27, "ALOACEAE", "ALOE", "ALOE SUPRALEVIS"),
+//   createData(28, "ALOACEAE", "ALOE", "ALOE PERRYI"),
 
-].sort((a, b) => (a.familia < b.familia ? -1 : 1));
-const menuItemsFamilias = [
-  { value: 1, label: "Asteraceae" },
-  { value: 2, label: "Brasicaceae" },
-  { value: 3, label: "Cactaceae" },
-  { value: 4, label: "Rosaceae" },
-  { value: 5, label: "Liliaceae" },
-];
-const menuItemsGeneros = [
-  { value: 1, label: "Acer" },
-  { value: 2, label: "Aralia" },
-  { value: 3, label: "Aloe" },
-  { value: 4, label: "Amarathus" },
-];
+// ].sort((a, b) => (a.familia < b.familia ? -1 : 1));
+// const menuItemsFamilias = [
+//   { value: 1, label: "Asteraceae" },
+//   { value: 2, label: "Brasicaceae" },
+//   { value: 3, label: "Cactaceae" },
+//   { value: 4, label: "Rosaceae" },
+//   { value: 5, label: "Liliaceae" },
+// ];
+// const menuItemsGeneros = [
+//   { value: 1, label: "Acer" },
+//   { value: 2, label: "Aralia" },
+//   { value: 3, label: "Aloe" },
+//   { value: 4, label: "Amarathus" },
+// ];
 function CustomPaginationActionsTable() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  const [rows, setRows] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const fetchRows = () => {
+    setIsLoading(true); // establecer isLoading en verdadero justo antes de comenzar la solicitud
+    fetch(apiUrlEspecies, getOptions)
+      .then(response => response.json())
+      .then(data => {
+        data = data.data;
+        data.sort((a, b) => (a.especieNombre < b.especieNombre ? -1 : 1));
+        setRows(data);
+        console.log(data.especieNombre);
+      })
+      .catch(error => console.error(error))
+      .finally(() => setIsLoading(false)); // establecer isLoading en falso después de completar la solicitud
+  }
+
+  React.useEffect(() => {
+    fetchRows();
+  }, []);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -132,6 +152,15 @@ function CustomPaginationActionsTable() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  const getOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const apiUrlEspecies = 'https://green-bank-api.onrender.com/api/taxonomia/especie';
+
+
 
   return (
     <TableContainer component={Paper}>
@@ -150,22 +179,22 @@ function CustomPaginationActionsTable() {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.codigo}>
+            <TableRow key={row.especieId}>
               <TableCell className='row-edits-icons-taxonomia' component="th" scope="row">
                 <span class="material-symbols-outlined">edit</span>
                 <span class="material-symbols-outlined">delete</span>
               </TableCell>
               <TableCell component="th" scope="row">
-                {row.codigo}
+                {row.especieId}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.familia}
+                {row.Genero.Familium.familiaNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.genero}
+                {row.Genero.generoNombre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                {row.especie}
+                {row.especieNombre}
               </TableCell>
             </TableRow>
           ))}
@@ -178,7 +207,7 @@ function CustomPaginationActionsTable() {
         </TableBody>
         <TableFooter>
           <TableRow className='paginationTable'>
-           {ModalTaxon()}
+            {ModalTaxon()}
             <TablePagination
               rowsPerPageOptions={[]}
               colSpan={3}
@@ -195,10 +224,38 @@ function CustomPaginationActionsTable() {
     </TableContainer>
   );
 }
-function ModalTaxon() {
+function ModalTaxon(fetchRows) {
+
+  const apiUrlEspecies = 'https://green-bank-api.onrender.com/api/taxonomia/especie';
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [familiaId, setFamiliaId] = useState('');
+  const [especieNombre, setEspecieNombre] = useState('');
+  const [generoId, setGeneroId] = useState('');
+  
+  const handleEnviado = () => {
+    console.log(familiaId, "Familia");
+    console.log(generoId, "Genero");
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "especieNombre": especieNombre,
+        "generoId": generoId
+      })
+    };
+    fetch(apiUrlEspecies, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        handleClose() // cerrar modal
+        window.location.reload()
+      })
+      .catch(error => console.error(`Error al hacer la petición: ${error}`))
+      ;    
+  };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -226,16 +283,23 @@ function ModalTaxon() {
           <p className='modalContainer__Title'>Añadir Nueva Especie</p>
           <div className="modalContainer__SelectsEspecies">
             <SelectSmall
-              title='Familia'
-              menuItems={menuItemsFamilias} />
+              value={familiaId}
+              setValue={setFamiliaId}
+              title='familia'
+              apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/familia'} />
             <SelectSmall
-              title='Genero'
-              menuItems={menuItemsGeneros} />
+              value={generoId}
+              setValue={setGeneroId}
+              title='genero'
+              apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/genero'} />
           </div>
 
-          <TextField className="modalContainer__Text" autoFocus="true" fullWidth="true"></TextField>
+          <CampoDeTexto 
+          value={especieNombre}
+          setValue={setEspecieNombre}
+          />
           <div className="modalButtons">
-            <div onClick={handleClose} className='modalButtons__Anadir'>
+            <div onClick={handleEnviado} className='modalButtons__Anadir'>
               <p>Añadir</p>
             </div>
             <div onClick={handleClose} className='modalButtons__Cancelar'>
@@ -263,11 +327,11 @@ function TaxonomiaEspecies() {
         <div className="EspeciesFilters">
           <div className="SelectsContainer">
             <SelectSmall
-              title='Familia'
-              menuItems={menuItemsFamilias} />
+              title='familia'
+              apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/familia'} />
             <SelectSmall
-              title='Genero'
-              menuItems={menuItemsGeneros} />
+              title='genero'
+              apiUrl={'https://green-bank-api.onrender.com/api/taxonomia/genero'} />
           </div>
           <div className='EspeciesFilters__Button'>
             <p>Filtrar</p>
