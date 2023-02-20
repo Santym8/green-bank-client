@@ -1,35 +1,31 @@
 import React from "react";
 import { useState } from "react";
-import "./TaxonomiaEspecies.css";
+import "./TaxonomiaFamilias.css";
 import Box from "@mui/material/Box";
 import CampoDeTexto from "../../components/TextField/CampoDeTexto";
-import SelectSmall from "../../components/SelectSmall/SelectSmall";
 // Modal
 import Modal from "@mui/material/Modal";
 
-export const ModalCreateEspecie = () => {
+export const ModalCreateFamilia = () => {
 
 
-  const apiUrlEspecies =
-    "https://green-bank-api.onrender.com/api/taxonomia/especie";
+  const apiUrlFamilias =
+    "https://green-bank-api.onrender.com/api/taxonomia/familia";
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [familiaId, setFamiliaId] = useState(null);
-  const [especieNombre, setEspecieNombre] = useState(null);
-  const [generoId, setGeneroId] = useState(null);
+  const [familiaNombre, setFamiliaNombre] = useState(null);
 
   const handleEnviado = () => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        especieNombre: especieNombre,
-        generoId: generoId,
+        familiaNombre: familiaNombre,
       }),
     };
-    fetch(apiUrlEspecies, requestOptions)
+    fetch(apiUrlFamilias, requestOptions)
       .then((response) => response.json())
       .then((data) => {
         handleClose(); // cerrar modal
@@ -51,7 +47,7 @@ export const ModalCreateEspecie = () => {
   };
   return (
     <div>
-      <div onClick={handleOpen} className="newSubespeciesButton">
+      <div onClick={handleOpen} className="newFamiliasButton">
         <p>+ Nuevo</p>
       </div>
       <Modal
@@ -61,27 +57,8 @@ export const ModalCreateEspecie = () => {
         aria-describedby="modal-modal-description"
       >
         <Box className="modalContainer" sx={style}>
-          <p className="modalContainer__Title">Añadir Nueva Especie</p>
-          <div className="modalContainer__SelectsEspecies">
-            <SelectSmall
-              value={familiaId}
-              setValue={setFamiliaId}
-              title="familia"
-              apiUrl={
-                "https://green-bank-api.onrender.com/api/taxonomia/familia"
-              }
-            />
-            <SelectSmall
-              value={generoId}
-              setValue={setGeneroId}
-              title="genero"
-              apiUrl={
-                "https://green-bank-api.onrender.com/api/taxonomia/genero"
-              }
-            />
-          </div>
-
-          <CampoDeTexto value={especieNombre} setValue={setEspecieNombre} />
+          <p className="modalContainer__Title">Añadir Nueva Familia</p>
+          <CampoDeTexto value={familiaNombre} setValue={setFamiliaNombre} />
           <div className="modalButtons">
             <div onClick={handleEnviado} className="modalButtons__Anadir">
               <p>Añadir</p>

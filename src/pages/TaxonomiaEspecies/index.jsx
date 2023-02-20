@@ -100,6 +100,11 @@ function CustomPaginationActionsTable() {
   const [rows, setRows] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const getOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
   const fetchRows = () => {
     const apiUrlEspecies =
       "https://green-bank-api.onrender.com/api/taxonomia/especie";
@@ -150,14 +155,10 @@ function CustomPaginationActionsTable() {
     setPage(0);
   };
 
-  const getOptions = {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  };
-
   return (
     <TableContainer component={Paper}>
       <Table
+        style={{ position: "relative" }}
         className="tableEspecies"
         sx={{ minWidth: 500 }}
         aria-label="custom pagination table"
@@ -230,6 +231,7 @@ function CustomPaginationActionsTable() {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               ActionsComponent={TablePaginationActions}
+              style={{ position: "absolute", bottom: 0, right: 30 }}
             />
           </TableRow>
         </TableFooter>
