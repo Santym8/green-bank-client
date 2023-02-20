@@ -100,6 +100,11 @@ function CustomPaginationActionsTable() {
   const [rows, setRows] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const getOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+
   const fetchRows = () => {
     const apiUrlEspecies =
       "https://green-bank-api.onrender.com/api/taxonomia/especie";
@@ -148,11 +153,6 @@ function CustomPaginationActionsTable() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const getOptions = {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
   };
 
   return (
