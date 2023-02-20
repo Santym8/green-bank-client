@@ -64,7 +64,7 @@ export const ModalCreateNombresLocales = () => {
         aria-describedby="modal-modal-description"
       >
         <Box className="modalContainer" sx={style}>
-          <p className="modalContainer__Title">Añadir Nueva SubEspecie</p>
+          <p className="modalContainer__Title">Añadir Nuevo Nombre Local</p>
           <div className="modalContainer__SelectsEspecies">
             <SelectSmall
               value={familiaId}

@@ -51,7 +51,7 @@ export const ModalCreateEspecie = () => {
   };
   return (
     <div>
-      <div onClick={handleOpen} className="newFamiliasButton">
+      <div onClick={handleOpen} className="newSubespeciesButton">
         <p>+ Nuevo</p>
       </div>
       <Modal

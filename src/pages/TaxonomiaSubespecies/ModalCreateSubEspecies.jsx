@@ -63,7 +63,7 @@ export const ModalCreateSubEspecies = () => {
         aria-describedby="modal-modal-description"
       >
         <Box className="modalContainer" sx={style}>
-          <p className="modalContainer__Title">Añadir Nueva SubEspecie</p>
+          <p className="modalContainer__Title">Añadir Nueva Subespecie</p>
           <div className="modalContainer__SelectsEspecies">
             <SelectSmall
               value={familiaId}

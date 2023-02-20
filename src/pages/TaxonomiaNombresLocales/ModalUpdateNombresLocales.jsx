@@ -66,7 +66,7 @@ export const ModalUpdateNombresLocales = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box className="modalContainer" sx={style}>
-          <p className="modalContainer__Title">Añadir Nueva Especie</p>
+          <p className="modalContainer__Title">Actualizar Nombre Local</p>
           <div className="modalContainer__SelectsEspecies">
             <SelectSmall
               value={familiaId}

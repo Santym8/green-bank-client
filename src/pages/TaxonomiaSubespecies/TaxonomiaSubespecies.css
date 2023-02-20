@@ -30,10 +30,12 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 .SelectsContainer {
     display: grid;
     grid-template-columns: auto auto auto;
 }
+
 .SubespeciesFilters__Button {
     display: flex;
     align-items: center;
@@ -47,6 +49,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
 .SubespeciesFilters__Button:hover {
     cursor: pointer;
     background-color: #73DB23;
@@ -96,6 +99,9 @@
     padding: 6px 6px 6px 8px;
     width: 103px;
     height: 36px;
+    margin-top: 8px;
+    margin-left: 8px;
+    margin-bottom: 8px;
     background: #0D3F1B;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 4px;
