@@ -159,13 +159,14 @@ function CustomPaginationActionsTable() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        const rowIndex = rows.findIndex(currentRow => currentRow.familiaId === row.familiaId);
-        if (rowIndex !== -1) {
-          const updatedRows = [...rows];
-          updatedRows[rowIndex] = newData;
-          setRows(updatedRows);
-          fetchRows(); // actualizar filas
-        }
+        // const rowIndex = rows.findIndex(currentRow => currentRow.familiaId === row.familiaId);
+        // if (rowIndex !== -1) {
+        //   const updatedRows = [...rows];
+        //   updatedRows[rowIndex] = newData;
+        //   setRows(updatedRows);
+        //   fetchRows(); // actualizar filas
+        // }
+        fetchRows(); // actualizar filas
         setEditingRow(null);
       })
       .catch(error => console.error(`Error al hacer la petición: ${error}`))
