@@ -158,7 +158,11 @@ function CustomPaginationActionsTable() {
 
   return (
     <TableContainer component={Paper}>
-      <Table className='tableNombresLocales' sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <Table  
+      style={{ position: "relative" }}
+      className='tableNombresLocales' 
+      sx={{ minWidth: 500 }} 
+      aria-label="custom pagination table">
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
@@ -232,6 +236,7 @@ function CustomPaginationActionsTable() {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               ActionsComponent={TablePaginationActions}
+              style={{ position: "absolute", bottom: 0, right: 30 }}
             />
           </TableRow>
         </TableFooter>
