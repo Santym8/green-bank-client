@@ -16,9 +16,9 @@ export const ModalCreateEspecie = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [familiaId, setFamiliaId] = useState("");
-  const [especieNombre, setEspecieNombre] = useState("");
-  const [generoId, setGeneroId] = useState("");
+  const [familiaId, setFamiliaId] = useState(null);
+  const [especieNombre, setEspecieNombre] = useState(null);
+  const [generoId, setGeneroId] = useState(null);
 
   const handleEnviado = () => {
     const requestOptions = {
