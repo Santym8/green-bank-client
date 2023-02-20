@@ -1,12 +1,11 @@
 import React from 'react';
 import HeadPrivateLayout from '../../components/HeadPrivateLayout/HeadPrivateLayout';
-import './Accesiones.css';
+import './accesiones.css';
 import './accesionesVentana2.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArticleIcon from '@mui/icons-material/Article';
-import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import SpeedIcon from '@mui/icons-material/Speed';
 import YardIcon from '@mui/icons-material/Yard';
