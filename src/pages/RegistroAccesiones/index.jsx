@@ -18,8 +18,9 @@ import { FormularioAccesionTaxonomia } from "./FormularioAccesionTaxonomia";
 import { FormularioAccesionRecoleccion } from "./FormularioAccesionRecoleccion";
 import { FormularioAccesionSuelo } from "./FormularioAccesionSuelo";
 import { FormularioAccesionClima } from "./FormularioAccesionClima";
+import { FormularioAccesionTerreno } from "./FormularioAccesionTerreno";
 
-const steps = ["Taxonomía", "Recolección", "Suelo", "Clima"];
+const steps = ["Taxonomía", "Recolección", "Suelo", "Clima", "Terreno"];
 
 const FormularioRegistroAccesiones = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -54,6 +55,8 @@ const FormularioRegistroAccesiones = () => {
         return <FormularioAccesionSuelo formik={formik} />;
       case 3:
         return <FormularioAccesionClima formik={formik} />;
+      case 4:
+        return <FormularioAccesionTerreno formik={formik} />;
       default:
         return <div>404: Not Found</div>;
     }

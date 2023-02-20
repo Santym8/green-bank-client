@@ -132,3 +132,44 @@ export const fetchLuz = (setValue) => {
     setValue(response.data.data);
   });
 };
+
+// ----------------------Formulario Terreno----------------
+export const fetchTopografia = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/topografia")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchFisiografia = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/fisiografia")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchVegetacionAlrededor = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/vegetacion-alrededor")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchFormaGeografica = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/forma-geografica")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchFormaPendiente = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/forma-pendiente")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
