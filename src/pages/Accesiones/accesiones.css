@@ -23,28 +23,26 @@
 
 }
 
-.UserFilters {
-    width: 100%;
+.AccesionesFilters {
+    width: 50%;
     display: flex;
-    flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.SelectsContainerUsers {
-    display: flex;
-    width: 100%;
+.SelectsContainerAccesiones {
     margin-top: 20px;
     margin-bottom: 20px;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.SelectsContainerUsers .title_date_start h1 {
+.Accesiones_Buscadores{
+    display: flex;
+    flex-direction: column;
+}
+
+.SelectsContainerAccesiones .title_date_start h1 {
     font-size: 20px;
 }
 
-.SelectsContainerUsers .title_date_finish h1 {
+.SelectsContainerAccesiones .title_date_finish h1 {
     font-size: 20px;
 }
 
@@ -145,7 +143,7 @@
     font-size: 14px;
 }
 
-.UserContainer {
+.AccesionesContainer {
     width: 75%;
     margin: 0 auto;
 }

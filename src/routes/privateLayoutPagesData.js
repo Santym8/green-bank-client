@@ -7,7 +7,7 @@ import TaxonomiaSubespecies from "../pages/TaxonomiaSubespecies";
 import TaxonomiaNombresLocales from "../pages/TaxonomiaNombresLocales";
 const PagesData = [
     {
-        path: "/accesiones",
+        path: "/accesiones/detalles",
         element: <Accesiones />,
         title: "accesiones"
     },
