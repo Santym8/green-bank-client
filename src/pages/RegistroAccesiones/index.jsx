@@ -137,6 +137,7 @@ const FormularioRegistroAccesiones = () => {
             margin: "5px",
             backgroundColor: "#003300",
             ":hover": { backgroundColor: "#076907" },
+            width: "200px",
           }}
         >
           Anterior
@@ -149,6 +150,7 @@ const FormularioRegistroAccesiones = () => {
               margin: "5px",
               backgroundColor: "#003300",
               ":hover": { backgroundColor: "#076907" },
+              width: "200px",
             }}
           >
             Enviar
@@ -161,6 +163,7 @@ const FormularioRegistroAccesiones = () => {
               margin: "5px",
               backgroundColor: "#003300",
               ":hover": { backgroundColor: "#076907" },
+              width: "200px",
             }}
           >
             Siguiente
