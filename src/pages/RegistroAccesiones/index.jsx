@@ -99,40 +99,38 @@ const FormularioRegistroAccesiones = () => {
   };
 
   return (
-    <Box
-      sx={{
-        maxWidth: "600px",
-        padding: 2,
-      }}
-    >
-      <Stepper activeStep={activeStep} orientation="horizontal">
-        {steps.map((label, index) => (
-          <Step key={index}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <Grid container>
-        <Grid item xs={12} sx={{ padding: "20px" }}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            {formContent(activeStep)}
-          </LocalizationProvider>
-        </Grid>
-        {formik.errors.submit && (
-          <Grid item xs={12}>
-            <FormHelperText error>{formik.errors.submit}</FormHelperText>
-          </Grid>
+    <Box>
+      <Grid sx={12}>
+        <Stepper activeStep={activeStep} orientation="horizontal">
+          {steps.map((label, index) => (
+            <Step key={index}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Grid>
+      <Grid
+        xs={12}
+        sx={{
+          width: "100%",
+          height: "85%",
+          padding: "50px",
+        }}
+      >
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {formContent(activeStep)}
+        </LocalizationProvider>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Button disabled={activeStep === 0} onClick={handleBack}>
+          Back
+        </Button>
+        {activeStep === steps.length - 1 ? (
+          <Button onClick={formik.handleSubmit}>Submit</Button>
+        ) : (
+          <Button onClick={formik.handleSubmit}>Next</Button>
         )}
-        <Grid item xs={12}>
-          <Button disabled={activeStep === 0} onClick={handleBack}>
-            Back
-          </Button>
-          {activeStep === steps.length - 1 ? (
-            <Button onClick={formik.handleSubmit}>Submit</Button>
-          ) : (
-            <Button onClick={formik.handleSubmit}>Next</Button>
-          )}
-        </Grid>
       </Grid>
     </Box>
   );

@@ -1,5 +1,11 @@
 import React from "react";
-import { Grid, TextField, FormHelperText, InputLabel } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  FormHelperText,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import {
@@ -28,109 +34,134 @@ export const FormularioAccesionSuelo = (props) => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <InputLabel id="drenajeSueloIdLabel">Drenaje Suelo</InputLabel>
-        <Select
-          id="drenajeSueloId"
-          labelId="drenajeSueloIdLabel"
-          name="drenajeSueloId"
-          value={formik.values.drenajeSueloId}
-          onChange={formik.handleChange}
-        >
-          {dataDrenajeSuelo.map((menuItem) => (
-            <MenuItem
-              key={menuItem.drenajeSueloId}
-              value={menuItem.drenajeSueloId}
-            >
-              {menuItem.drenajeSueloNombre}
-            </MenuItem>
-          ))}
-        </Select>
-
-        <InputLabel id="colorSueloIdLabel">Color Suelo</InputLabel>
-        <Select
-          id="colorSueloId"
-          labelId="colorSueloIdLabel"
-          name="colorSueloId"
-          value={formik.values.colorSueloId}
-          onChange={formik.handleChange}
-        >
-          {dataColorSuelo.map((menuItem) => (
-            <MenuItem key={menuItem.colorSueloId} value={menuItem.colorSueloId}>
-              {menuItem.colorSueloNombre}
-            </MenuItem>
-          ))}
-        </Select>
-
-        <InputLabel id="pedregosidadIdLabel">Pedregosidad</InputLabel>
-        <Select
-          id="pedregosidadId"
-          labelId="pedregosidadIdLabel"
-          name="pedregosidadId"
-          value={formik.values.pedregosidadId}
-          onChange={formik.handleChange}
-        >
-          {dataPedregosidad.map((menuItem) => (
-            <MenuItem
-              key={menuItem.pedregosidadId}
-              value={menuItem.pedregosidadId}
-            >
-              {menuItem.pedregosidadNombre}
-            </MenuItem>
-          ))}
-        </Select>
-        <TextField
-          id="sueloDetallePedregosidad"
-          label="Pedregosidad (Otros)"
-          name="sueloDetallePedregosidad"
-          value={formik.values.sueloDetallePedregosidad}
-          onChange={formik.handleChange}
-          variant="outlined"
-        />
-
-        <InputLabel id="texturaSueloIdLabel">Textura Suelo</InputLabel>
-        <Select
-          id="texturaSueloId"
-          labelId="texturaSueloIdLabel"
-          name="texturaSueloId"
-          value={formik.values.texturaSueloId}
-          onChange={formik.handleChange}
-        >
-          {dataTexturaSuelo.map((menuItem) => (
-            <MenuItem
-              key={menuItem.texturaSueloId}
-              value={menuItem.texturaSueloId}
-            >
-              {menuItem.texturaSueloNombre}
-            </MenuItem>
-          ))}
-        </Select>
-        <TextField
-          id="sueloDetalleTextura"
-          label="Textura (Otros)"
-          name="sueloDetalleTextura"
-          value={formik.values.sueloDetalleTextura}
-          onChange={formik.handleChange}
-          variant="outlined"
-        />
-
-        <InputLabel id="erosionSueloIdLabel">Erosión Suelo</InputLabel>
-        <Select
-          id="erosionSueloId"
-          labelId="erosionSueloIdLabel"
-          name="erosionSueloId"
-          value={formik.values.erosionSueloId}
-          onChange={formik.handleChange}
-        >
-          {dataErosionSuelo.map((menuItem) => (
-            <MenuItem
-              key={menuItem.erosionSueloId}
-              value={menuItem.erosionSueloId}
-            >
-              {menuItem.erosionSueloNombre}
-            </MenuItem>
-          ))}
-        </Select>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel id="drenajeSueloIdLabel">Drenaje Suelo</InputLabel>
+          <Select
+            id="drenajeSueloId"
+            labelId="drenajeSueloIdLabel"
+            name="drenajeSueloId"
+            value={formik.values.drenajeSueloId}
+            onChange={formik.handleChange}
+          >
+            {dataDrenajeSuelo.map((menuItem) => (
+              <MenuItem
+                key={menuItem.drenajeSueloId}
+                value={menuItem.drenajeSueloId}
+              >
+                {menuItem.drenajeSueloNombre}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel id="colorSueloIdLabel">Color Suelo</InputLabel>
+          <Select
+            id="colorSueloId"
+            labelId="colorSueloIdLabel"
+            name="colorSueloId"
+            value={formik.values.colorSueloId}
+            onChange={formik.handleChange}
+          >
+            {dataColorSuelo.map((menuItem) => (
+              <MenuItem
+                key={menuItem.colorSueloId}
+                value={menuItem.colorSueloId}
+              >
+                {menuItem.colorSueloNombre}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel id="pedregosidadIdLabel">Pedregosidad</InputLabel>
+          <Select
+            id="pedregosidadId"
+            labelId="pedregosidadIdLabel"
+            name="pedregosidadId"
+            value={formik.values.pedregosidadId}
+            onChange={formik.handleChange}
+          >
+            {dataPedregosidad.map((menuItem) => (
+              <MenuItem
+                key={menuItem.pedregosidadId}
+                value={menuItem.pedregosidadId}
+              >
+                {menuItem.pedregosidadNombre}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <TextField
+            id="sueloDetallePedregosidad"
+            label="Pedregosidad (Otros)"
+            name="sueloDetallePedregosidad"
+            value={formik.values.sueloDetallePedregosidad}
+            onChange={formik.handleChange}
+            variant="outlined"
+          />
+        </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel id="texturaSueloIdLabel">Textura Suelo</InputLabel>
+          <Select
+            id="texturaSueloId"
+            labelId="texturaSueloIdLabel"
+            name="texturaSueloId"
+            value={formik.values.texturaSueloId}
+            onChange={formik.handleChange}
+          >
+            {dataTexturaSuelo.map((menuItem) => (
+              <MenuItem
+                key={menuItem.texturaSueloId}
+                value={menuItem.texturaSueloId}
+              >
+                {menuItem.texturaSueloNombre}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <TextField
+            id="sueloDetalleTextura"
+            label="Textura (Otros)"
+            name="sueloDetalleTextura"
+            value={formik.values.sueloDetalleTextura}
+            onChange={formik.handleChange}
+            variant="outlined"
+          />
+        </FormControl>
+      </Grid>
+      <Grid item xs={6}>
+        <FormControl fullWidth>
+          <InputLabel id="erosionSueloIdLabel">Erosión Suelo</InputLabel>
+          <Select
+            id="erosionSueloId"
+            labelId="erosionSueloIdLabel"
+            name="erosionSueloId"
+            value={formik.values.erosionSueloId}
+            onChange={formik.handleChange}
+          >
+            {dataErosionSuelo.map((menuItem) => (
+              <MenuItem
+                key={menuItem.erosionSueloId}
+                value={menuItem.erosionSueloId}
+              >
+                {menuItem.erosionSueloNombre}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Grid>
     </Grid>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, TextField } from "@mui/material";
+import { Grid, TextField, InputLabel, FormControl } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { fetchInstitutoColector } from "./fetchData";
 
@@ -16,9 +16,10 @@ export const FormularioAccesionRecoleccion = (props) => {
   }, []);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
+    <Grid container spacing={5}>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="recoleccionNombre"
           label="Nombre Recolector"
           name="recoleccionNombre"
@@ -26,7 +27,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="recoleccionApellidos"
           label="Apellido Recolector"
           name="ecoleccionApellidos"
@@ -34,34 +38,50 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
-        <DesktopDatePicker
-          id="recoleccionFecha"
-          name="recoleccionFecha"
-          label="Fecha Recolección"
-          inputFormat="DD/MM/YYYY"
-          value={formik.values.recoleccionFecha}
-          onChange={(value) => {
-            formik.setFieldValue("recoleccionFecha", value);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-        <Select
-          id="institutoColectorId"
-          label="Instituto Colector"
-          name="institutoColectorId"
-          value={formik.values.institutoColectorId}
-          onChange={formik.handleChange}
-        >
-          {dataInstitutoColector.map((menuItem) => (
-            <MenuItem
-              key={menuItem.institutoColectorId}
-              value={menuItem.institutoColectorId}
-            >
-              {menuItem.institutoColectorNombre}
-            </MenuItem>
-          ))}
-        </Select>
+      </Grid>
+      <Grid item xs={3}>
+        <FormControl fullWidth>
+          <DesktopDatePicker
+            fullWidth
+            id="recoleccionFecha"
+            name="recoleccionFecha"
+            label="Fecha Recolección"
+            inputFormat="DD/MM/YYYY"
+            value={formik.values.recoleccionFecha}
+            onChange={(value) => {
+              formik.setFieldValue("recoleccionFecha", value);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </FormControl>
+      </Grid>
+      <Grid item xs={3}>
+        <FormControl fullWidth>
+          <InputLabel id="institutoColectorIdLabel">
+            Instituto Colector
+          </InputLabel>
+          <Select
+            fullWidth
+            id="institutoColectorId"
+            label="Instituto Colector"
+            name="institutoColectorId"
+            value={formik.values.institutoColectorId}
+            onChange={formik.handleChange}
+          >
+            {dataInstitutoColector.map((menuItem) => (
+              <MenuItem
+                key={menuItem.institutoColectorId}
+                value={menuItem.institutoColectorId}
+              >
+                {menuItem.institutoColectorNombre}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoEtnico"
           label="Grupo Etnico"
           name="ubicacionRecoleccionGrupoEtnico"
@@ -69,7 +89,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoIdioma"
           label="Idioma"
           name="ubicacionRecoleccionGrupoIdioma"
@@ -77,7 +100,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoPais"
           label="Pais"
           name="ubicacionRecoleccionGrupoPais"
@@ -85,7 +111,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoProvincia"
           label="Provincia"
           name="ubicacionRecoleccionGrupoProvincia"
@@ -93,7 +122,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoCanton"
           label="Cantón"
           name="ubicacionRecoleccionGrupoCanton"
@@ -101,7 +133,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoParroquia"
           label="Parroquia"
           name="ubicacionRecoleccionGrupoParroquia"
@@ -109,7 +144,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoLocalidad"
           label="Localidad"
           name="ubicacionRecoleccionGrupoLocalidad"
@@ -117,7 +155,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoNombrePredio"
           label="Nombre Predio"
           name="ubicacionRecoleccionGrupoNombrePredio"
@@ -125,7 +166,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoPropietario"
           label="Nombre Propietario"
           name="ubicacionRecoleccionGrupoPropietario"
@@ -133,7 +177,10 @@ export const FormularioAccesionRecoleccion = (props) => {
           onChange={formik.handleChange}
           variant="outlined"
         />
+      </Grid>
+      <Grid item xs={3}>
         <TextField
+          fullWidth
           id="ubicacionRecoleccionGrupoLocalizacion"
           label="Localización"
           name="ubicacionRecoleccionGrupoLocalizacion"
