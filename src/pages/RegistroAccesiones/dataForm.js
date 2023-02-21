@@ -25,8 +25,8 @@ export const formInitialValues = {
   ubicacionRecoleccionGrupoNombrePredio: null,
   ubicacionRecoleccionGrupoPropietario: null,
   ubicacionRecoleccionGrupoLocalizacion: null,
-  ubicacionRecoleccionGrupoLatitud: null,
-  ubicacionRecoleccionGrupoLongitud: null,
+  ubicacionRecoleccionGrupoLatitud: 0.358981,
+  ubicacionRecoleccionGrupoLongitud: -78.111094,
   ubicacionRecoleccionGrupoAltitud: null,
 
   sueloDetalleTextura: null,

@@ -25,6 +25,7 @@ import { FormularioAccesionFechas } from "./FormularioAccesionFechas";
 import { FormularioAccesionInformacion } from "./FormularioAccesionInformacion";
 import { FormularioAccesionInformacionSegundaParte } from "./FormularioAccesionInformacionSegundaParte";
 import { FormularioAccesionFotos } from "./FormularioAccesionFotos";
+import { FormularioAccesionMapa } from "./FormularioAccesionMapa";
 const steps = [
   "Taxonomía",
   "Recolección",
@@ -51,7 +52,6 @@ const FormularioRegistroAccesiones = () => {
     onSubmit: (values) => {
       if (activeStep === steps.length - 1) {
         const baseUrl = "https://green-bank-api.onrender.com";
-        // const local = "http://localhost:3000";
         const formData = new FormData();
 
         Object.keys(values).forEach((key) => {
@@ -87,6 +87,8 @@ const FormularioRegistroAccesiones = () => {
         return <FormularioAccesionTaxonomia formik={formik} />;
       case 1:
         return <FormularioAccesionRecoleccion formik={formik} />;
+      case 2:
+        return <FormularioAccesionMapa formik={formik} />;
       case 3:
         return <FormularioAccesionSuelo formik={formik} />;
       case 4:
