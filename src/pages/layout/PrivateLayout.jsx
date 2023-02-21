@@ -5,8 +5,8 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 
 function PrivateLayout() {
     return (
-        <div className="container">
-            <div className="sidebar"> <Sidebar /> </div>
+        <div className="container">            
+            <Sidebar />
             <div className="main"> <Outlet /> </div>
         </div>
     );

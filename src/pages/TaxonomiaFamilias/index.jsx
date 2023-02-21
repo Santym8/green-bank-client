@@ -148,7 +148,7 @@ function CustomPaginationActionsTable() {
   };
   return (
     <TableContainer component={Paper}>
-      {isLoading && <CircularProgress style={{ position: 'absolute', top: '50%', left: '50%' }} />}
+      {isLoading && <CircularProgress style={{ position: 'relative', top: '50%', left: '50%' }} />}
       <Table className='tableFamilias' sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow>
