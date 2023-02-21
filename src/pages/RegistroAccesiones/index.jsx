@@ -23,6 +23,7 @@ import { FormularioAccesionTerreno } from "./FormularioAccesionTerreno";
 import { FormularioAccesionFechas } from "./FormularioAccesionFechas";
 import { FormularioAccesionInformacion } from "./FormularioAccesionInformacion";
 import { FormularioAccesionInformacionSegundaParte } from "./FormularioAccesionInformacionSegundaParte";
+import { FormularioAccesionFotos } from "./FormularioAccesionFotos";
 const steps = [
   "Taxonomía",
   "Recolección",
@@ -90,6 +91,8 @@ const FormularioRegistroAccesiones = () => {
         return <FormularioAccesionInformacion formik={formik} />;
       case 8:
         return <FormularioAccesionInformacionSegundaParte formik={formik} />;
+      case 9:
+        return <FormularioAccesionFotos formik={formik} />;
       default:
         return <div>404: Not Found</div>;
     }
