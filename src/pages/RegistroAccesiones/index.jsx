@@ -66,7 +66,7 @@ const FormularioRegistroAccesiones = () => {
           })
           .then((res) => {
             if (res.status == 200) {
-              // Redireccionar a tabla accesiones
+              window.location.href = "/accesiones";
             }
             if (res.status == 400) {
               window.alert(res.data);
