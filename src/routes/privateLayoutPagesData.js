@@ -6,6 +6,7 @@ import TaxonomiaFamilias from "../pages/TaxonomiaFamilias";
 import TaxonomiaEspecies from "../pages/TaxonomiaEspecies";
 import TaxonomiaSubespecies from "../pages/TaxonomiaSubespecies";
 import TaxonomiaNombresLocales from "../pages/TaxonomiaNombresLocales";
+import Pasaporte from "../pages/Pasaportes";
 const PagesData = [
     {
         path: "/accesiones/detalles",
@@ -21,6 +22,11 @@ const PagesData = [
         path: "/accesiones/detalles/accesion",
         element: <Accesiones2 />,
         title: "accesiones"
+    },
+    {
+        path: "/accesiones/detalles/accesion/pasaporte",
+        element: <Pasaporte />,
+        title: "pasaporte"
     },
     {
         path: "/usuarios",

@@ -41,24 +41,26 @@ function AccesionElejir() {
                         <p className='title_Id_accesion'>ID:ABCD1234</p>
                     </div>
                     <div className='content_info_botones'>
-                        <Button className='content_info_botones_reportes'>
-                            <Button className='content_info_botones_reporte1era'>
-                                <ArticleIcon
-                                    sx={{
-                                        color: 'white',                                    
-                                        fontSize: 150
-                                    }}
-                                />
+                        <Link to="/accesiones/detalles/accesion/pasaporte">
+                            <Button className='content_info_botones_reportes'>
+                                <Button className='content_info_botones_reporte1era'>
+                                    <ArticleIcon
+                                        sx={{
+                                            color: 'white',
+                                            fontSize: 150
+                                        }}
+                                    />
+                                </Button>
+                                <div className='content_info_botones_reporte_2da'>
+                                    <span>Pasaporte</span>
+                                </div>
                             </Button>
-                            <div className='content_info_botones_reporte_2da'>
-                                <span>Pasaporte</span>
-                            </div>
-                        </Button>
+                        </Link>
                         <Button className='content_info_botones_reportes'>
                             <Button className='content_info_botones_reporte1era'>
                                 <SpeedIcon
                                     sx={{
-                                        color: 'white',                                    
+                                        color: 'white',
                                         fontSize: 150
                                     }}
                                 />
@@ -71,7 +73,7 @@ function AccesionElejir() {
                             <Button className='content_info_botones_reporte1era'>
                                 <YardIcon
                                     sx={{
-                                        color: 'white',                                    
+                                        color: 'white',
                                         fontSize: 150
                                     }}
                                 />
