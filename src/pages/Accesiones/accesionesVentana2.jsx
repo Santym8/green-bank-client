@@ -42,12 +42,14 @@ function AccesionElejir() {
                     </div>
                     <div className='content_info_botones'>
                         <Link to="/accesiones/detalles/accesion/pasaporte">
-                            <Button className='content_info_botones_reportes'>
+                            <Button sx={{
+                                backgroundColor: '#0D3F1B'                                                                
+                            }} className='content_info_botones_reportes'>
                                 <Button className='content_info_botones_reporte1era'>
                                     <ArticleIcon
                                         sx={{
                                             color: 'white',
-                                            fontSize: 150
+                                            fontSize: 150                                        
                                         }}
                                     />
                                 </Button>
@@ -56,7 +58,10 @@ function AccesionElejir() {
                                 </div>
                             </Button>
                         </Link>
-                        <Button className='content_info_botones_reportes'>
+                        <Button sx={{
+                            backgroundColor: '#0D3F1B'
+                        }}
+                            className='content_info_botones_reportes'>
                             <Button className='content_info_botones_reporte1era'>
                                 <SpeedIcon
                                     sx={{
@@ -69,7 +74,10 @@ function AccesionElejir() {
                                 <span>Estado y Protocolos</span>
                             </div>
                         </Button>
-                        <Button className='content_info_botones_reportes'>
+                        <Button sx={{
+                            backgroundColor: '#0D3F1B'
+                        }}
+                            className='content_info_botones_reportes content_info_botones_reportes2'>
                             <Button className='content_info_botones_reporte1era'>
                                 <YardIcon
                                     sx={{
@@ -79,7 +87,7 @@ function AccesionElejir() {
                                 />
                             </Button>
                             <div className='content_info_botones_reporte_2da'>
-                                <span>Historial Resiembras</span>
+                                <span>Estado y Protocolos</span>
                             </div>
                         </Button>
                     </div>

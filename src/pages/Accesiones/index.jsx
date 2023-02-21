@@ -95,24 +95,26 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(codigo, nombre, subespecie, especie, genero, familia, fecha) {
-    return { codigo, nombre, subespecie, especie, genero, familia, fecha };
-}
+// function createData(codigo, nombre, subespecie, especie, genero, familia, fecha) {
+//     return { codigo, nombre, subespecie, especie, genero, familia, fecha };
+// }
 
-const rows = [
-    createData("ABCD1234", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-    createData("ABCD1235", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-    createData("ABCD1236", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-    createData("ABCD1237", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-    createData("ABCD1238", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-    createData("ABCD1239", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-]
-    .sort((a, b) => (a.nombre < b.nombre ? -1 : 1));
+// const rows = [
+//     createData("ABCD1234", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
+//     createData("ABCD1235", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
+//     createData("ABCD1236", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
+//     createData("ABCD1237", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
+//     createData("ABCD1238", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
+//     createData("ABCD1239", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
+// ]
+//     .sort((a, b) => (a.nombre < b.nombre ? -1 : 1));
 
 
 function CustomPaginationActionsTable() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(4);
+    const [rows, setRows] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -126,6 +128,30 @@ function CustomPaginationActionsTable() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
+    const getOptions = {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    };
+
+    const fetchRows = () => {
+        const apiUrlPasaportes = 'https://green-bank-api.onrender.com/api/accesiones/pasaporte';
+        setIsLoading(true); // establecer isLoading en verdadero justo antes de comenzar la solicitud
+        fetch(apiUrlPasaportes, getOptions)
+            .then(response => response.json())
+            .then(data => {
+                data = data.data;
+                data.sort((a, b) => (a.generoNombre < b.generoNombre ? -1 : 1));
+                setRows(data);
+            })
+            .catch(error => console.error(error))
+            .finally(() => setIsLoading(false)); // establecer isLoading en falso después de completar la solicitud
+    }
+
+    React.useEffect(() => {
+        fetchRows();
+    }, []);
+
 
     return (
         <TableContainer component={Paper}>
@@ -147,29 +173,29 @@ function CustomPaginationActionsTable() {
                         : rows
                     ).map((row) => (
 
-                        <TableRow key={row.codigo}>
+                        <TableRow key={row.accesionId}>
                             <TableCell component="th" scope="row">
                                 <Link to={"/accesiones/detalles/accesion"}>
-                                    {row.codigo}
+                                    {row.accesionId}
                                 </Link>
                             </TableCell>
                             <TableCell component="th" scope="row">
-                                {row.nombre}
+                                {row.NombreLocal.nombreLocalNombre}
                             </TableCell>
                             <TableCell component="th" scope="row">
-                                {row.subespecie}
+                                {row.NombreLocal.Subespecie.subespecieNombre}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="left">
-                                {row.especie}
+                                {row.NombreLocal.Subespecie.Especie.especieNombre}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="left">
-                                {row.genero}
+                                {row.NombreLocal.Subespecie.Especie.Genero.generoNombre}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="left">
-                                {row.familia}
+                                {row.NombreLocal.Subespecie.Especie.Genero.Familium.familiaNombre}
                             </TableCell>
                             <TableCell style={{ width: 160 }} align="left">
-                                {row.fecha}
+                                {row.createdAt}
                             </TableCell>
                         </TableRow>
 
@@ -323,7 +349,7 @@ function Accesiones() {
                     </div>
                 </div>
 
-                <div className="taxonomiaEspeciesContainer__table">
+                <div className="AccesionesContainer__table">
                     {CustomPaginationActionsTable()}
                 </div>
             </div>
