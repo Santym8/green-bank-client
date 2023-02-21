@@ -25,12 +25,14 @@ import { FormularioAccesionInformacionSegundaParte } from "./FormularioAccesionI
 const steps = [
   "Taxonomía",
   "Recolección",
+  "Ubicación",
   "Suelo",
   "Clima",
   "Terreno",
   "Fechas",
   "Información",
   "Información Adicional",
+  "Fotos",
 ];
 
 const FormularioRegistroAccesiones = () => {
@@ -62,17 +64,17 @@ const FormularioRegistroAccesiones = () => {
         return <FormularioAccesionTaxonomia formik={formik} />;
       case 1:
         return <FormularioAccesionRecoleccion formik={formik} />;
-      case 2:
-        return <FormularioAccesionSuelo formik={formik} />;
       case 3:
-        return <FormularioAccesionClima formik={formik} />;
+        return <FormularioAccesionSuelo formik={formik} />;
       case 4:
-        return <FormularioAccesionTerreno formik={formik} />;
+        return <FormularioAccesionClima formik={formik} />;
       case 5:
-        return <FormularioAccesionFechas formik={formik} />;
+        return <FormularioAccesionTerreno formik={formik} />;
       case 6:
-        return <FormularioAccesionInformacion formik={formik} />;
+        return <FormularioAccesionFechas formik={formik} />;
       case 7:
+        return <FormularioAccesionInformacion formik={formik} />;
+      case 8:
         return <FormularioAccesionInformacionSegundaParte formik={formik} />;
       default:
         return <div>404: Not Found</div>;
