@@ -19,6 +19,29 @@ export const FormularioAccesionTaxonomia = (props) => {
 
   const { formik } = props;
 
+  React.useEffect(() => {
+    fetchFamilia(setdataFamilia);
+    fetchGenero(setdataGenero, formik.values.familiaId);
+    fetchEspecie(
+      setdataEspecie,
+      formik.values.familiaId,
+      formik.values.generoId
+    );
+    fetchSubespecie(
+      setSubespecie,
+      formik.values.familiaId,
+      formik.values.generoId,
+      formik.values.especieId
+    );
+    fetchNombreLocal(
+      setdataNombreLocal,
+      formik.values.familiaId,
+      formik.values.generoId,
+      formik.values.especieId,
+      formik.values.subespecieId
+    );
+  }, []);
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -111,6 +134,9 @@ export const FormularioAccesionTaxonomia = (props) => {
           label="Nombre Local"
           labelId="nombreLocalLabel"
           name="nombreLocalId"
+          error={Boolean(
+            formik.touched.nombreLocalId && formik.errors.nombreLocalId
+          )}
           value={formik.values.nombreLocalId}
           onChange={formik.handleChange}
           onOpen={(event) => {

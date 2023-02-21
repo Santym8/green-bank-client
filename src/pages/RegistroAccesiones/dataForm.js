@@ -86,4 +86,6 @@ export const formInitialValues = {
   observacionContenido: null,
 };
 
-export const validacionDatos = {};
+export const validacionDatos = {
+  nombreLocalId: Yup.number().required("Se requiere el nombre local"),
+};
