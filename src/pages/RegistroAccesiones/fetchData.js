@@ -173,3 +173,76 @@ export const fetchFormaPendiente = (setValue) => {
       setValue(response.data.data);
     });
 };
+
+// ----------------------Informacion Adicional----------------
+export const fetchEstadoGermoplasma = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/estado-germoplasma")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchFuenteColeccion = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/fuente-coleccion")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchTipoMuestraColectada = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/tipo-muestra-colectada")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchPartePlantaUtilizada = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/parte-planta-utilizada")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchMetodoMuestreo = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/metodo-muestreo")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchPracticaCultural = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/practica-cultural")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchFrecuenciaMuestra = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/frecuencia-muestra")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchEstadoFenologicoPoblacion = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/estado-fenologico-poblacion")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
+
+export const fetchUsoMaterial = (setValue) => {
+  axios
+    .get(baseUrl + "/api/accesiones/formulario/uso-material")
+    .then((response) => {
+      setValue(response.data.data);
+    });
+};
