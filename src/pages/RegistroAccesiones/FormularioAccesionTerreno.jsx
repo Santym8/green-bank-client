@@ -41,6 +41,7 @@ export const FormularioAccesionTerreno = (props) => {
         <FormControl fullWidth>
           <InputLabel id="climaTemperaturaLabel">Topografía</InputLabel>
           <Select
+            label="Topografía"
             id="topografiaId"
             labelId="topografiaIdLabel"
             name="topografiaId"
@@ -75,6 +76,7 @@ export const FormularioAccesionTerreno = (props) => {
         <FormControl fullWidth>
           <InputLabel id="climaTemperaturaLabel">Fisiografía</InputLabel>
           <Select
+            label="Fisiografía"
             id="fisiografiaId"
             labelId="fisiografiaIdLabel"
             name="fisiografiaId"
@@ -111,6 +113,7 @@ export const FormularioAccesionTerreno = (props) => {
             Vegetación Alrededor
           </InputLabel>
           <Select
+            label="Vegetación Alrededor"
             id="vegetacionAlrededorId"
             labelId="vegetacionAlrededorIdLabel"
             name="vegetacionAlrededorId"
@@ -145,6 +148,7 @@ export const FormularioAccesionTerreno = (props) => {
         <FormControl fullWidth>
           <InputLabel id="climaTemperaturaLabel">Forma Geográfica</InputLabel>
           <Select
+            label="Forma Geográfica"
             id="formaGeograficaId"
             labelId="formaGeograficaIdLabel"
             name="formaGeograficaId"
@@ -179,6 +183,7 @@ export const FormularioAccesionTerreno = (props) => {
         <FormControl fullWidth>
           <InputLabel id="formaPendienteIdLabel">Forma Pendiente</InputLabel>
           <Select
+            label="Forma Pendiente"
             id="formaPendienteId"
             labelId="formaPendienteIdLabel"
             name="formaPendienteId"
@@ -197,11 +202,11 @@ export const FormularioAccesionTerreno = (props) => {
         </FormControl>
       </Grid>
 
-      <Grid item xs={12} justifyContent="center">
-        Aspecto Pendiente (Orientación)
+      <Grid item xs={3} style={{ display: "flex", alignItems: "center" }}>
+        <h4>Aspecto Pendiente (Orientación)</h4>
       </Grid>
 
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <FormControl fullWidth>
           <TextField
             id="terrenoAspectoPendienteNorte"
@@ -214,7 +219,7 @@ export const FormularioAccesionTerreno = (props) => {
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <FormControl fullWidth>
           <TextField
             id="terrenoAspectoPendienteSur"
@@ -227,7 +232,7 @@ export const FormularioAccesionTerreno = (props) => {
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <FormControl fullWidth>
           <TextField
             id="terrenoAspectoPendienteEste"
@@ -240,7 +245,7 @@ export const FormularioAccesionTerreno = (props) => {
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <FormControl fullWidth>
           <TextField
             id="terrenoAspectoPendienteOeste"

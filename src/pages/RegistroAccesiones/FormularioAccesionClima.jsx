@@ -20,36 +20,36 @@ export const FormularioAccesionClima = (props) => {
   }, []);
 
   return (
-    <Grid container spacing={3} sx={{ padding: "30px"}} justifyContent="center">
+    <Grid
+      container
+      spacing={3}
+      sx={{ padding: "30px" }}
+      justifyContent="center"
+    >
       <Grid item xs={7}>
         <FormControl fullWidth>
-          <InputLabel id="climaTemperaturaLabel">Temperatura (°C)</InputLabel>
           <TextField
+            label="Temperatura (°C)"
             id="climaTemperatura"
             labelId="climaTemperaturaLabel"
             name="climaTemperatura"
             value={formik.values.climaTemperatura}
             onChange={formik.handleChange}
             type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
+            variant="outlined"
           />
         </FormControl>
       </Grid>
       <Grid item xs={7}>
         <FormControl fullWidth>
-          <InputLabel id="climaHumedadLabel">Humedad (%)</InputLabel>
           <TextField
+            label="Humedad (%)"
             id="climaHumedad"
             labelId="climaHumedadLabel"
             name="climaHumedad"
             value={formik.values.climaHumedad}
             onChange={formik.handleChange}
             type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
           />
         </FormControl>
       </Grid>
@@ -57,6 +57,7 @@ export const FormularioAccesionClima = (props) => {
         <FormControl fullWidth>
           <InputLabel id="luzIdLabel">Luz</InputLabel>
           <Select
+            label="Luz"
             id="luzId"
             labelId="luzIdLabel"
             name="luzId"

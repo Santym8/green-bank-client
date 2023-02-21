@@ -41,6 +41,7 @@ export const FormularioAccesionSuelo = (props) => {
             id="drenajeSueloId"
             labelId="drenajeSueloIdLabel"
             name="drenajeSueloId"
+            label="Drenaje Suelo"
             value={formik.values.drenajeSueloId}
             onChange={formik.handleChange}
           >
@@ -62,6 +63,7 @@ export const FormularioAccesionSuelo = (props) => {
             id="colorSueloId"
             labelId="colorSueloIdLabel"
             name="colorSueloId"
+            label="Color Suelo"
             value={formik.values.colorSueloId}
             onChange={formik.handleChange}
           >
@@ -83,6 +85,7 @@ export const FormularioAccesionSuelo = (props) => {
             id="pedregosidadId"
             labelId="pedregosidadIdLabel"
             name="pedregosidadId"
+            label="Pedregosidad"
             value={formik.values.pedregosidadId}
             onChange={formik.handleChange}
           >
@@ -116,6 +119,7 @@ export const FormularioAccesionSuelo = (props) => {
             id="texturaSueloId"
             labelId="texturaSueloIdLabel"
             name="texturaSueloId"
+            label="Textura Suelo"
             value={formik.values.texturaSueloId}
             onChange={formik.handleChange}
           >
@@ -149,6 +153,7 @@ export const FormularioAccesionSuelo = (props) => {
             id="erosionSueloId"
             labelId="erosionSueloIdLabel"
             name="erosionSueloId"
+            label="Erosión Suelo"
             value={formik.values.erosionSueloId}
             onChange={formik.handleChange}
           >

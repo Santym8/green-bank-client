@@ -58,6 +58,7 @@ export const FormularioAccesionTaxonomia = (props) => {
             id="familiaId"
             labelId="familiaIdLabel"
             name="familiaId"
+            label="Familia"
             value={formik.values.familiaId}
             onChange={formik.handleChange}
             onOpen={(event) => {
@@ -80,6 +81,7 @@ export const FormularioAccesionTaxonomia = (props) => {
             id="generoId"
             labelId="generoIdLabel"
             name="generoId"
+            label="Genero"
             value={formik.values.generoId}
             onChange={formik.handleChange}
             onOpen={(event) => {
@@ -102,6 +104,7 @@ export const FormularioAccesionTaxonomia = (props) => {
             id="especieId"
             labelId="especieIdLabel"
             name="especieId"
+            label="Especie"
             value={formik.values.especieId}
             onChange={formik.handleChange}
             onOpen={(event) => {
@@ -128,6 +131,7 @@ export const FormularioAccesionTaxonomia = (props) => {
             variant="outlined"
             labelId="subespecieIdLabel"
             name="subespecieId"
+            label="Subespecie"
             value={formik.values.subespecieId}
             onChange={formik.handleChange}
             onOpen={(event) => {
@@ -154,11 +158,10 @@ export const FormularioAccesionTaxonomia = (props) => {
         <FormControl fullWidth>
           <InputLabel id="nombreLocalLabel">Nombre Local</InputLabel>
           <Select
-            fullWidth
-            variant="outlined"
-            label="Nombre Local"
             labelId="nombreLocalLabel"
+            id="nombreLocal"
             name="nombreLocalId"
+            label="Nombre Local"
             error={Boolean(
               formik.touched.nombreLocalId && formik.errors.nombreLocalId
             )}

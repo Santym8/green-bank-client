@@ -45,6 +45,7 @@ export const FormularioAccesionInformacion = (props) => {
             Estado Germoplasma
           </InputLabel>
           <Select
+            label="Estado Germoplasma"
             id="estadoGermoplasmaId"
             labelId="estadoGermoplasmaIdLabel"
             name="estadoGermoplasmaId"
@@ -79,6 +80,7 @@ export const FormularioAccesionInformacion = (props) => {
         <FormControl fullWidth>
           <InputLabel id="fuenteColeccionIdLabel">Fuente Colección</InputLabel>
           <Select
+            label="Fuente Colección"
             id="fuenteColeccionId"
             labelId="fuenteColeccionIdLabel"
             name="fuenteColeccionId"
@@ -115,6 +117,7 @@ export const FormularioAccesionInformacion = (props) => {
             Tipo Muestra Colectada
           </InputLabel>
           <Select
+            label="Tipo Muestra Colectada"
             id="tipoMuestraColectadaId"
             labelId="tipoMuestraColectadaIdLabel"
             name="tipoMuestraColectadaId"
@@ -151,6 +154,7 @@ export const FormularioAccesionInformacion = (props) => {
             Parte Planta Utilizada
           </InputLabel>
           <Select
+            label="Parte Planta Utilizada"
             id="partePlantaUtilizadaId"
             labelId="partePlantaUtilizadaIdLabel"
             name="partePlantaUtilizadaId"
@@ -187,6 +191,7 @@ export const FormularioAccesionInformacion = (props) => {
             Practica Cultural
           </InputLabel>
           <Select
+            label="Practica Cultural"
             id="practicaCulturalId"
             labelId="practicaCulturalIdLabel"
             name="practicaCulturalId"
@@ -221,6 +226,7 @@ export const FormularioAccesionInformacion = (props) => {
         <FormControl fullWidth>
           <InputLabel id="usoMaterialIdLabel">Uso Material</InputLabel>
           <Select
+            label="Uso Material"
             id="usoMaterialId"
             labelId="usoMaterialIdLabel"
             name="usoMaterialId"

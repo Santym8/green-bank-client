@@ -109,6 +109,7 @@ export const FormularioAccesionInformacionSegundaParte = (props) => {
         <FormControl fullWidth>
           <InputLabel id="metodoMuestreoIdLabel">Metodo de Muestreo</InputLabel>
           <Select
+            label="Metodo de Muestreo"
             id="metodoMuestreoId"
             labelId="metodoMuestreoIdLabel"
             name="metodoMuestreoId"
@@ -133,6 +134,7 @@ export const FormularioAccesionInformacionSegundaParte = (props) => {
             Frecuencia de Muestra
           </InputLabel>
           <Select
+            label="Frecuencia de Muestra"
             id="frecuenciaMuestraId"
             labelId="frecuenciaMuestraIdLabel"
             name="frecuenciaMuestraId"
@@ -157,6 +159,7 @@ export const FormularioAccesionInformacionSegundaParte = (props) => {
             Estado Fenológico de la Población
           </InputLabel>
           <Select
+            label="Estado Fenológico de la Población"
             id="estadoFenologicoPoblacionId"
             labelId="estadoFenologicoPoblacionIdLabel"
             name="estadoFenologicoPoblacionId"
