@@ -51,8 +51,15 @@ const FormularioRegistroAccesiones = () => {
     onSubmit: (values) => {
       if (activeStep === steps.length - 1) {
         const baseUrl = "https://green-bank-api.onrender.com";
+        const local = "http://localhost:3000";
+        const formData = new FormData();
+
+        Object.keys(values).forEach((key) => {
+          formData.append(key, values[key]);
+        });
+
         axios
-          .post(baseUrl + "/api/accesiones/pasaporte", values, {
+          .post(local + "/api/accesiones/pasaporte", values, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -67,7 +74,7 @@ const FormularioRegistroAccesiones = () => {
           });
 
         //-----------Hacer POST---------
-        console.log(JSON.stringify(values, null, 2));
+        // console.log(JSON.stringify(values, null, 2));
       } else {
         setActiveStep((prevStep) => prevStep + 1);
       }

@@ -5,15 +5,25 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import {} from "./fetchData";
 
 export const FormularioAccesionFotos = (props) => {
-  const { formik, formData } = props;
+  const { formik } = props;
 
   React.useEffect(() => {}, []);
 
   return (
     <Grid container spacing={2}>
       <Button variant="contained" component="label">
-        Upload File
-        <input type="file" hidden />
+        Agregar Fotos
+        <input
+          type="file"
+          hidden
+          accept="image/*"
+          id="fotos"
+          name="fotos"
+          onChange={(event) => {
+            formik.setFieldValue("fotos", event.target.files);
+          }}
+          multiple
+        />
       </Button>
     </Grid>
   );

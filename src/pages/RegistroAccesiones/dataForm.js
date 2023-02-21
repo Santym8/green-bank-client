@@ -84,6 +84,8 @@ export const formInitialValues = {
   usoMaterialId: null,
 
   observacionContenido: null,
+
+  fotos: null,
 };
 
 export const validacionDatos = {
