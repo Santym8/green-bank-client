@@ -12,6 +12,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import logo from '../../images/logo.png';
+import { height, maxHeight } from '@mui/system';
 
 function Layout() {
     return (
@@ -121,35 +122,35 @@ function Layout() {
                     </MenuItem>
                 </SubMenu>
                 <div className="grid-ayuda-social">
-                    <div>
-                        <MenuItem
-                            component={<Link to="/ayuda" />}
-                            icon={<span class="material-symbols-outlined">help</span>}>
-                            Ayuda
-                        </MenuItem>
-                    </div>
+
                     <div className='social-container'>
-                        <div className="social-icon">
-                            <a href='https://www.facebook.com/' target="_blank">
-                                <FontAwesomeIcon className="icon" icon={faFacebook} />
-                            </a>
-                        </div>
-                        <div className="social-icon">
-                            <a href='https://twitter.com/' target="_blank">
-                                <FontAwesomeIcon className="icon" icon={faTwitter} />
-                            </a>
-                        </div>
-                        <div className="social-icon">
-                            <a href="https://mail.google.com/" target="_blank">
-                                <FontAwesomeIcon className="icon" icon={faGoogle} />
-                            </a>
-                        </div>
                     </div>
                 </div>
             </Menu>
+            <div className="grid-ayuda-social">
+                <div >
+                    <Link className='ayuda_link' to='/ayuda'>
+                        <span class="material-symbols-outlined">help</span>
+                        Ayuda
+                    </Link>
+                </div>
+                <div className="social-icon">
+                    <a href='https://www.facebook.com/' target="_blank">
+                        <FontAwesomeIcon className="icon" icon={faFacebook} />
+                    </a>
+                </div>
+                <div className="social-icon">
+                    <a href='https://twitter.com/' target="_blank">
+                        <FontAwesomeIcon className="icon" icon={faTwitter} />
+                    </a>
+                </div>
+                <div className="social-icon">
+                    <a href="https://mail.google.com/" target="_blank">
+                        <FontAwesomeIcon className="icon" icon={faGoogle} />
+                    </a>
+                </div>
+            </div>
         </Sidebar>
-
-
 
     );
 }

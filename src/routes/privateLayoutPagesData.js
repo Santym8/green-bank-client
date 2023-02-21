@@ -1,16 +1,33 @@
 import Accesiones from "../pages/Accesiones";
+import Accesiones2 from "../pages/Accesiones/accesionesVentana2";
 import Usuarios from "../pages/Usuarios";
 import TaxonomiaGeneros from "../pages/TaxonomiaGeneros";
 import TaxonomiaFamilias from "../pages/TaxonomiaFamilias";
 import TaxonomiaEspecies from "../pages/TaxonomiaEspecies";
 import TaxonomiaSubespecies from "../pages/TaxonomiaSubespecies";
 import TaxonomiaNombresLocales from "../pages/TaxonomiaNombresLocales";
+import Pasaporte from "../pages/Pasaportes";
 import FormularioRegistroAccesiones from "../pages/RegistroAccesiones";
 const PagesData = [
+  {
+    path: "/accesiones/detalles",
+    element: <Accesiones />,
+    title: "accesiones",
+  },
   {
     path: "/accesiones",
     element: <Accesiones />,
     title: "accesiones",
+  },
+  {
+    path: "/accesiones/detalles/accesion",
+    element: <Accesiones2 />,
+    title: "accesiones",
+  },
+  {
+    path: "/accesiones/detalles/accesion/pasaporte",
+    element: <Pasaporte />,
+    title: "pasaporte",
   },
   {
     path: "/usuarios",

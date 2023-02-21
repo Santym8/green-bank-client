@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@1,700&display=swap');
+
+.AccesionesVentana2_conteiner {
+    display: flex;
+    flex-direction: column;
+    width: 99%;
+    height: 84vh;
+    background-color: #ffffff;
+    border: 2px solid #e5e3e3;
+    /* box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); */
+    border-radius: 5px;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.accesionesVentana2__content_info {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.content_info_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.title_nombe_accesion {
+    font-size: 53.22px;
+    font-family: 'Alumni Sans', sans-serif;
+}
+
+.title_Id_accesion {
+    font-size: 35.48px;
+    font-family: 'Alumni Sans', sans-serif;
+}
+
+.content_info_botones {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.content_info_botones_reportes {
+    display: flex;
+    width: 290px;
+    height: 356px;
+    justify-content: space-between;
+    flex-direction: column;
+    border-bottom: 9.28px;
+}
+
+
+.content_info_botones_reportes:nth-of-type(1):hover {
+    background-color: #6b8a47;
+    cursor: pointer;
+}
+
+.content_info_botones_reportes:nth-of-type(2):hover {
+    background-color: #6b8a47;
+    cursor: pointer;
+}
+
+
+.content_info_botones_reporte1era {
+
+    display: flex;
+    width: 290px;
+    height: 60%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content_info_botones_reporte_2da {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    width: 290px;
+    height: 40%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 9.28px;
+    color: #0D3F1B;
+}
