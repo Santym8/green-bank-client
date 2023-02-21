@@ -13,6 +13,7 @@ import {
   Grid,
   FormHelperText,
   Button,
+  Container,
 } from "@mui/material";
 import { formInitialValues, validacionDatos } from "./dataForm";
 import { FormularioAccesionTaxonomia } from "./FormularioAccesionTaxonomia";
@@ -99,8 +100,8 @@ const FormularioRegistroAccesiones = () => {
   };
 
   return (
-    <Box>
-      <Grid sx={12}>
+    <Container xs={{ width: "100%", height: "100%" }}>
+      <Container>
         <Stepper activeStep={activeStep} orientation="horizontal">
           {steps.map((label, index) => (
             <Step key={index}>
@@ -108,31 +109,58 @@ const FormularioRegistroAccesiones = () => {
             </Step>
           ))}
         </Stepper>
-      </Grid>
-      <Grid
-        xs={12}
+      </Container>
+
+      <Container
         sx={{
-          width: "100%",
-          height: "85%",
           padding: "50px",
         }}
       >
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           {formContent(activeStep)}
         </LocalizationProvider>
-      </Grid>
+      </Container>
 
-      <Grid item xs={12}>
-        <Button disabled={activeStep === 0} onClick={handleBack}>
-          Back
+      <Grid container justifyContent="center">
+        <Button
+          variant="contained"
+          disabled={activeStep === 0}
+          onClick={handleBack}
+          sx={{
+            margin: "5px",
+            backgroundColor: "#003300",
+            ":hover": { backgroundColor: "#076907" },
+          }}
+        >
+          Anterior
         </Button>
         {activeStep === steps.length - 1 ? (
-          <Button onClick={formik.handleSubmit}>Submit</Button>
+          <Button
+            variant="contained"
+            onClick={formik.handleSubmit}
+            sx={{
+              margin: "5px",
+              backgroundColor: "#003300",
+              ":hover": { backgroundColor: "#076907" },
+            }}
+          >
+            Enviar
+          </Button>
         ) : (
-          <Button onClick={formik.handleSubmit}>Next</Button>
+          <Button
+            variant="contained"
+            onClick={formik.handleSubmit}
+            sx={{
+              margin: "5px",
+              backgroundColor: "#003300",
+              ":hover": { backgroundColor: "#076907" },
+            }}
+          >
+            Siguiente
+          </Button>
         )}
       </Grid>
-    </Box>
+    </Container>
   );
 };
 
