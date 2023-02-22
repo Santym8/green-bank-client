@@ -18,7 +18,7 @@ export const FormularioAccesionMapa = (props) => {
     <Grid container spacing={1} sx={{ width: "100%" }}>
       <Grid item xs={12}>
         <h3 style={{ textAlign: "center" }}>
-          Mueve el Punto hasta la zona de recolección
+          Selecciona el punto de Recoleccón 
         </h3>
       </Grid>
 
@@ -30,7 +30,7 @@ export const FormularioAccesionMapa = (props) => {
               formik.setFieldValue("ubicacionRecoleccionGrupoLongitud", e.lng);
             }}
             bootstrapURLKeys={{
-              key: "AIzaSyB3cUNdBS_iR3zaFXW_UcgetreF7tyJ4pM",
+              key: "AIzaSyCYbJG1Ki5KTSl4tfK0PDiKpiw0X46CtOI",
             }}
             defaultCenter={{ lat: 0.358981, lng: -78.111094 }}
             defaultZoom={20}

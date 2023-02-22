@@ -15,6 +15,7 @@ import {
   Button,
   Container,
 } from "@mui/material";
+import HeadPrivateLayout from "../../components/HeadPrivateLayout/HeadPrivateLayout";
 import { formInitialValues, validacionDatos } from "./dataForm";
 import { FormularioAccesionTaxonomia } from "./FormularioAccesionTaxonomia";
 import { FormularioAccesionRecoleccion } from "./FormularioAccesionRecoleccion";
@@ -109,45 +110,36 @@ const FormularioRegistroAccesiones = () => {
   };
 
   return (
-    <Container xs={{ width: "100%", height: "100%" }}>
-      <Container>
-        <Stepper activeStep={activeStep} orientation="horizontal">
-          {steps.map((label, index) => (
-            <Step key={index}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Container>
+    <>
+      <div className="headPrivateContainer">
+        <HeadPrivateLayout title="Registro de Accesión" icon="Park" user="FL" />
+      </div>
+      <Container xs={{ width: "100%", height: "100%" }}>
+        <Container>
+          <Stepper activeStep={activeStep} orientation="horizontal">
+            {steps.map((label, index) => (
+              <Step key={index}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </Container>
 
-      <Container
-        sx={{
-          padding: "50px",
-        }}
-      >
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          {formContent(activeStep)}
-        </LocalizationProvider>
-      </Container>
-
-      <Grid container justifyContent="center">
-        <Button
-          variant="contained"
-          disabled={activeStep === 0}
-          onClick={handleBack}
+        <Container
           sx={{
-            margin: "5px",
-            backgroundColor: "#003300",
-            ":hover": { backgroundColor: "#076907" },
-            width: "200px",
+            padding: "50px",
           }}
         >
-          Anterior
-        </Button>
-        {activeStep === steps.length - 1 ? (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            {formContent(activeStep)}
+          </LocalizationProvider>
+        </Container>
+
+        <Grid container justifyContent="center">
           <Button
             variant="contained"
-            onClick={formik.handleSubmit}
+            disabled={activeStep === 0}
+            onClick={handleBack}
             sx={{
               margin: "5px",
               backgroundColor: "#003300",
@@ -155,24 +147,38 @@ const FormularioRegistroAccesiones = () => {
               width: "200px",
             }}
           >
-            Enviar
+            Anterior
           </Button>
-        ) : (
-          <Button
-            variant="contained"
-            onClick={formik.handleSubmit}
-            sx={{
-              margin: "5px",
-              backgroundColor: "#003300",
-              ":hover": { backgroundColor: "#076907" },
-              width: "200px",
-            }}
-          >
-            Siguiente
-          </Button>
-        )}
-      </Grid>
-    </Container>
+          {activeStep === steps.length - 1 ? (
+            <Button
+              variant="contained"
+              onClick={formik.handleSubmit}
+              sx={{
+                margin: "5px",
+                backgroundColor: "#003300",
+                ":hover": { backgroundColor: "#076907" },
+                width: "200px",
+              }}
+            >
+              Enviar
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              onClick={formik.handleSubmit}
+              sx={{
+                margin: "5px",
+                backgroundColor: "#003300",
+                ":hover": { backgroundColor: "#076907" },
+                width: "200px",
+              }}
+            >
+              Siguiente
+            </Button>
+          )}
+        </Grid>
+      </Container>
+    </>
   );
 };
 
