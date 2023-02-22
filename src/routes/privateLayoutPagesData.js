@@ -7,7 +7,9 @@ import TaxonomiaEspecies from "../pages/TaxonomiaEspecies";
 import TaxonomiaSubespecies from "../pages/TaxonomiaSubespecies";
 import TaxonomiaNombresLocales from "../pages/TaxonomiaNombresLocales";
 import Pasaporte from "../pages/Pasaportes";
+import FormularioRegistroAccesiones from "../pages/RegistroAccesiones";
 const PagesData = [
+
     {
         path: "/accesiones/detalles",
         element: <Accesiones />,
@@ -57,7 +59,12 @@ const PagesData = [
         path: "/taxonomia/nombres-locales",
         element: <TaxonomiaNombresLocales />,
         title: "taxonomia nombres locales"
-    }
+    },
+    {
+      path: "/accesiones/registro",
+      element: <FormularioRegistroAccesiones />,
+      title: "registro accesiones",
+    },
 ];
 
 export default PagesData;
