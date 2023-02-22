@@ -95,21 +95,6 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-// function createData(codigo, nombre, subespecie, especie, genero, familia, fecha) {
-//     return { codigo, nombre, subespecie, especie, genero, familia, fecha };
-// }
-
-// const rows = [
-//     createData("ABCD1234", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-//     createData("ABCD1235", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-//     createData("ABCD1236", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-//     createData("ABCD1237", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-//     createData("ABCD1238", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-//     createData("ABCD1239", "ALOE", "ALOE BARBADENSIS", "ALOE VERA", "ALOE", "ASPHODELACEAE", "20/02/2023"),
-// ]
-//     .sort((a, b) => (a.nombre < b.nombre ? -1 : 1));
-
-
 function CustomPaginationActionsTable() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(4);
@@ -141,7 +126,7 @@ function CustomPaginationActionsTable() {
             .then(response => response.json())
             .then(data => {
                 data = data.data;
-                data.sort((a, b) => (a.generoNombre < b.generoNombre ? -1 : 1));
+                data.sort((a, b) => (a.NombreLocal.nombreLocalNombre < b.NombreLocal.nombreLocalNombre ? -1 : 1));
                 setRows(data);
             })
             .catch(error => console.error(error))
@@ -175,7 +160,7 @@ function CustomPaginationActionsTable() {
 
                         <TableRow key={row.accesionId}>
                             <TableCell component="th" scope="row">
-                                <Link to={"/accesiones/detalles/accesion"}>
+                                <Link to={`/accesiones/detalles/accesion/${row.accesionId}`}>
                                     {row.accesionId}
                                 </Link>
                             </TableCell>
@@ -209,9 +194,11 @@ function CustomPaginationActionsTable() {
                 </TableBody>
                 <TableFooter className='content_footer'>
                     <TableRow className="paginationTableUser">
-                        <div className="newUsuarioButton">
-                            <p>+ Nuevo</p>
-                        </div>
+                        <Link to={"/accesiones/registro"}>
+                            <div className="newUsuarioButton">
+                                <p>+ Nuevo</p>
+                            </div>
+                        </Link>
                         <TablePagination
                             rowsPerPageOptions={[]}
                             colSpan={3}
