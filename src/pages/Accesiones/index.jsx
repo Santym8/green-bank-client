@@ -194,9 +194,11 @@ function CustomPaginationActionsTable() {
                 </TableBody>
                 <TableFooter className='content_footer'>
                     <TableRow className="paginationTableUser">
-                        <div className="newUsuarioButton">
-                            <p>+ Nuevo</p>
-                        </div>
+                        <Link to={"/accesiones/registro"}>
+                            <div className="newUsuarioButton">
+                                <p>+ Nuevo</p>
+                            </div>
+                        </Link>
                         <TablePagination
                             rowsPerPageOptions={[]}
                             colSpan={3}
