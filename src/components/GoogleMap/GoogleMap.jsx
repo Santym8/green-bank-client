@@ -6,16 +6,16 @@ const containerStyle = {
   height: '250px'
 };
 
-const center = {
-  lat: 0.35841400089283665,
-  lng: -78.11149747443214
-};
 
-function GoogleMapa() {
+function GoogleMapa({lat, lng}) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyCYbJG1Ki5KTSl4tfK0PDiKpiw0X46CtOI"
   })
+  const center = {
+    lat: lat,
+    lng: lng
+  };
 
   const [map, setMap] = React.useState(null)
 

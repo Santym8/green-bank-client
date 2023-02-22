@@ -76,7 +76,7 @@
     max-height: 300px;
     width: 90%;
     height: 200px;
-    margin: 0 auto;
+    margin: auto auto;
 }
 .TaxonomiaContainer {
     grid-row: 1/2;
@@ -112,7 +112,7 @@
     justify-content: center;
 }
 .mapa{
-    margin: 0 auto;
+    margin: auto auto;
 }
 .TerrenoContainer {
     grid-area: 4 / 2 / 5 / 3;

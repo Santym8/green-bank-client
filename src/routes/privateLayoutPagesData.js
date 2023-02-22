@@ -1,5 +1,5 @@
 import Accesiones from "../pages/Accesiones";
-import Accesiones2 from "../pages/Accesiones/accesionesVentana2";
+import AccesionElejir from "../pages/Accesiones/accesionesVentana2";
 import Usuarios from "../pages/Usuarios";
 import TaxonomiaGeneros from "../pages/TaxonomiaGeneros";
 import TaxonomiaFamilias from "../pages/TaxonomiaFamilias";
@@ -19,12 +19,12 @@ const PagesData = [
         title: "accesiones"
     },
     {
-        path: "/accesiones/detalles/accesion",
-        element: <Accesiones2 />,
+        path: "/accesiones/detalles/accesion/:accesionId",
+        element: <AccesionElejir />,
         title: "accesiones"
     },
     {
-        path: "/accesiones/detalles/accesion/pasaporte",
+        path: "/accesiones/detalles/accesion/pasaporte/:accesionId",
         element: <Pasaporte />,
         title: "pasaporte"
     },
